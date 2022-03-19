@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class steering : MonoBehaviour
+public class joystickScript : MonoBehaviour
 {
     [SerializeField]
     private float maxR = 1;
