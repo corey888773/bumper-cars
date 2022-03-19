@@ -6,14 +6,14 @@ using static System.Math;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float speed = 0.02f; 
-    protected Vector3 _playerMove;
+    [SerializeField] private float speed = 10.0f; 
+    protected Vector2 _playerMove;
 
     private BoxCollider2D _boxCollider2D;
 
     private joystickScript _joystick;
-
-    //public float Velocity = 1.0f;
+    
+    public float rotationSpeed = 720.0f;
 
     private void Awake()
     {
@@ -26,13 +26,19 @@ public class Player : MonoBehaviour
         
     }
 
-    private void Move(Vector3 input)
+    private void Move(Vector2 input)
     {
         float degrees = (float) Atan2(input.x, input.y);
-        _playerMove = new Vector3(input.x, input.y, 0);
-        transform.Translate(_playerMove);
-        // transform.rotation = Quaternion.Euler(new Vector3(0, 0, degrees));
+        _playerMove = new Vector2(input.x, input.y);
+        float inputMagnitude = Mathf.Clamp01(_playerMove.magnitude);
+        transform.Translate(_playerMove * Time.deltaTime, Space.World);
 
+
+        if (_playerMove != Vector2.zero)
+        {
+            Quaternion rotateDirection= Quaternion.LookRotation(Vector3.forward, _playerMove);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, Time.deltaTime * rotationSpeed);
+        }
 
 
     }
@@ -42,6 +48,6 @@ public class Player : MonoBehaviour
         Vector2 input = _joystick.getValue() * speed;
         float y = Input.GetAxisRaw("Vertical");
         float x = Input.GetAxisRaw("Horizontal");
-        Move(new Vector3(input.x, input.y, 0));
+        Move(new Vector2(input.x, input.y));
     }
 }
