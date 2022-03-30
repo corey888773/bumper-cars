@@ -9,21 +9,21 @@ public class Player : MonoBehaviour
      
     protected Vector2 _playerMove;
 
-    private BoxCollider2D _boxCollider2D;
-    private Rigidbody2D _rigidbody2D;
+    protected BoxCollider2D _boxCollider2D;
+    protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
     
 
-    private joystickScript _joystick;
+    public joystickScript _joystick;
     
     public float _rotationSpeed = 720.0f;
     public float _velocity = 10.0f;
     
-    private void Awake()
+    protected virtual void Awake()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _joystick = GameObject.Find("JoystickCircleDirection").GetComponent<joystickScript>();
+        // _joystick = GameObject.Find("JoystickCircleDirection").GetComponent<joystickScript>();
     }
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         
     }
 
-    private void Move(Vector2 input)
+    protected virtual void Move(Vector2 input)
     {
         float degrees = (float) Atan2(input.x, input.y);
         _playerMove = new Vector2(input.x, input.y);
@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, Time.deltaTime * _rotationSpeed);
         }
         
+        _rigidbody2D.AddForce(_playerMove * inputMagnitude);
         
         // // move collision test. box creates a box on top of our object which is moved slightly into the movement direction before the player.
         // //the box tests if it covers any colliders, and if so, it stops the movement.
@@ -62,11 +63,11 @@ public class Player : MonoBehaviour
         // }
             
         // transform.Translate(_playerMove * Time.deltaTime * inputMagnitude, Space.World);
-        _rigidbody2D.AddForce(_playerMove * inputMagnitude);
+        
         
     }
     
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         Vector2 input = _joystick.getValue() * _velocity;
         float y = Input.GetAxisRaw("Vertical");
