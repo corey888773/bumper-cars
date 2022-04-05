@@ -107,7 +107,26 @@ public class mapgen : MonoBehaviour
         
     }
 }
-    
+    //GETTERS
+    public Vector2 getStart(){
+        return start;
+    }
+
+    public bool[,] getTopWalls(){
+        return topWalls;
+    }
+    public bool[,] getLeftWalls(){
+        return leftWalls;
+    }
+    public float getBlockLength(){
+        return blockLength;
+    }
+    public int getKX(){
+        return kx;
+    }
+    public int getKY(){
+        return ky;
+    }
 
     //onStart
     void Start()

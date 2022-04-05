@@ -123,6 +123,31 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1358213346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 939918050415055959, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+  m_PrefabInstance: {fileID: 939918051741213877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1358213349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358213346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5531334d1717140679eb9b5b03abb6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labyrinthWidth: 20
+  labyrinthHeight: 8
+  wallHeight: 0.1
+  blockLength: 0.4
+  parametrP: 0.015
+  leftWall: {fileID: 2672528396467564710, guid: 0e32bf83f405c43b0ac6596f3a479f85, type: 3}
+  topWall: {fileID: 2672528396467564710, guid: 0e32bf83f405c43b0ac6596f3a479f85, type: 3}
+  randomSeed: 0
 --- !u!1 &1999077428
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,3 +232,61 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &939918051741213877
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055953, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939918050415055959, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+      propertyPath: m_Name
+      value: Labyrith
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 939918050415055958, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 3f6ca8ef2697c46d89793d2fe01679f7, type: 3}
