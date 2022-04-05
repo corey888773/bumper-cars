@@ -8,14 +8,13 @@ public class Player : MonoBehaviour
 {
      
     protected Vector2 _playerMove;
-
+    
     protected BoxCollider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
     
 
     public joystickScript _joystick;
-    
     public float _rotationSpeed = 720.0f;
     public float _velocity = 10.0f;
     
@@ -25,16 +24,12 @@ public class Player : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         // _joystick = GameObject.Find("JoystickCircleDirection").GetComponent<joystickScript>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     protected virtual void Move(Vector2 input)
     {
         float degrees = (float) Atan2(input.x, input.y);
         _playerMove = new Vector2(input.x, input.y);
+        
         float inputMagnitude = Mathf.Clamp01(_playerMove.magnitude);
         // transform.Translate(_playerMove * Time.deltaTime, Space.World);
 
