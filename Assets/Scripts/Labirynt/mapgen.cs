@@ -6,12 +6,13 @@ public class mapgen : MonoBehaviour
 {
     [SerializeField] float labyrinthWidth, labyrinthHeight, wallHeight, blockLength, parametrP;
     private Vector2 start = new Vector2();
-    public GameObject leftWall, topWall;
+    public GameObject leftWall, topWall, walls;
     public int randomSeed; 
     private bool[,] leftWalls, topWalls, visited;
     //bloki w pionie i poziomie
         private int kx, ky; 
-    private float wallWidth; 
+    private float wallWidth;
+    private bool isInitialized = false;
     //generates walls
     void labyrinthGenerator(){
         //zmienne
@@ -30,27 +31,29 @@ public class mapgen : MonoBehaviour
             }
         
         //Tera generujemy labirynt
-        Random.seed = randomSeed;
+        //Random.seed = randomSeed;
+        Random.InitState(randomSeed);
         labDigger(kx / 2, ky / 2);
 
         Vector2 Lwsp = new Vector2(start.x+wallHeight/2, start.y + wallHeight/2 + blockLength/2);
         Vector2 Pwsp = new Vector2(start.x+wallHeight/2 + blockLength/2, start.y + wallHeight/2);
-        foreach(Transform child in transform){
+        foreach(Transform child in walls.transform)
+        {
             Destroy(child);
         }
         for(int i = 0; i < kx + 1; i++)
             for(int j = 0; j < ky + 1; j++){
                 if(leftWalls[i,j] && j < ky){
                     GameObject newWall = Instantiate(leftWall,new Vector2(Lwsp.x+i*blockLength, Lwsp.y+j*blockLength),Quaternion.identity);
-                    newWall.transform.parent = transform;
+                    newWall.transform.parent = walls.transform;
                     newWall.transform.localScale = new Vector3(wallHeight, wallWidth, 1.0f);
                 }
                 if(topWalls[i,j] && i < kx){ 
                     GameObject newWall = Instantiate(topWall,new Vector2(Pwsp.x+i*blockLength, Pwsp.y+j*blockLength),Quaternion.identity);
-                    newWall.transform.parent = transform;
+                    newWall.transform.parent = walls.transform;
                     newWall.transform.localScale = new Vector3(wallWidth, wallHeight, 1.0f);
                 }
-            } 
+            }
     }
     //dfs generujący korytarze
     void labDigger(int x, int y){
@@ -131,9 +134,15 @@ public class mapgen : MonoBehaviour
     //onStart
     void Start()
     {
+        walls = GameObject.Find("Walls");
         start = new Vector2(transform.position.x - 0.5f * labyrinthWidth, transform.position.y - 0.5f * labyrinthHeight);
         labyrinthGenerator(); 
-        
+        isInitialized = true;
+    }
+
+    public bool isReady()
+    {
+        return isInitialized;
     }
 
     // Update is called once per frame
