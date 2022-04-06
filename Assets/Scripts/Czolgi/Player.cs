@@ -16,8 +16,6 @@ namespace Czolgi
 
         private void Update()
         {
-
-
             rgb.velocity = new Vector2(MoveJoystick.horizontal, MoveJoystick.vertical).normalized * speed;
             Quaternion rotation = Quaternion.LookRotation(Vector3.forward, rgb.velocity);
             transform.rotation = rotation;
