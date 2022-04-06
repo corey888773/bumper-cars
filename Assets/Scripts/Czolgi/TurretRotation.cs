@@ -16,7 +16,7 @@ namespace Czolgi
             _transform = GetComponent<Transform>();
         }
         
-        void Update()
+        void FixedUpdate()
         {
             _padPosition.x = FireJoystick.horizontal;
             _padPosition.y = FireJoystick.vertical;
