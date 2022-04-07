@@ -9,7 +9,7 @@ public class movingScript : MonoBehaviour
     private Vector2 halfBlock;
     private float blockLength;
     private int kx, ky;
-    private int [,] paths;
+    private int[,] paths;
     private Camera cam_;
     private mapgen mapa;
     [SerializeField] private GameObject pathTile;
@@ -17,14 +17,19 @@ public class movingScript : MonoBehaviour
 
     private Vector2Int endOfPath, position;
     private int lastValue = 2;
-    
+
     private bool isUpdated = false;
 
     void newPathTile(int i, int j)
     {
-        GameObject new_tile = Instantiate(pathTile, ((Vector2) position) * blockLength + mapa.getStart() + halfBlock, Quaternion.identity);
+        GameObject new_tile = Instantiate(pathTile, (new Vector2(i, j)) * blockLength + mapa.getStart() + halfBlock, Quaternion.identity);
         new_tile.transform.parent = tiles.transform;
-        new_tile.name = "pathTile" + position.x.ToString() + "," + position.y.ToString(); 
+        new_tile.name = "pathTile" + i.ToString() + "," + j.ToString();
+    }
+
+    void removePathTile(int i, int j)
+    {
+        Destroy(GameObject.Find("pathTile" + i.ToString() + "," + j.ToString()));
     }
 
     void updatePlayerPath()
@@ -34,67 +39,76 @@ public class movingScript : MonoBehaviour
             bool canGo = false;
             Touch touch = Input.GetTouch(0);
             Vector2 position_got = cam_.ScreenToWorldPoint(touch.position);
-            position.x = (int) ((position_got.x - mapa.getStart().x) / blockLength);
-            position.y = (int) ((position_got.y - mapa.getStart().y) / blockLength);
-            
+            position.x = (int)((position_got.x - mapa.getStart().x) / blockLength);
+            position.y = (int)((position_got.y - mapa.getStart().y) / blockLength);
+
             //checking if neighbour tile and no wall between them
-            if ( position.x >=0 && position.x < kx && position.y >=0 && position.y < ky ) 
-            { 
-                if ( Mathf.Abs(position.x-endOfPath.x) + Mathf.Abs(position.y-endOfPath.y) == 1 ){
-                    if(position.x != endOfPath.x){
-                        if(position.x > endOfPath.x && !leftWalls[position.x, position.y])
-                            canGo=true;
+            if (position.x >= 0 && position.x < kx && position.y >= 0 && position.y < ky)
+            {
+                if (Mathf.Abs(position.x - endOfPath.x) + Mathf.Abs(position.y - endOfPath.y) == 1)
+                {
+                    if (position.x != endOfPath.x)
+                    {
+                        if (position.x > endOfPath.x && !leftWalls[position.x, position.y])
+                            canGo = true;
                         else if (position.x < endOfPath.x && !leftWalls[endOfPath.x, endOfPath.y])
-                            canGo=true;
+                            canGo = true;
                     }
-                    else if(position.y != endOfPath.y){
-                        if(position.y < endOfPath.y && !topWalls[endOfPath.x, endOfPath.y])
-                            canGo=true;
-                        else if(position.y > endOfPath.y && !topWalls[position.x,position.y])
-                            canGo=true;
-                    } 
+                    else if (position.y != endOfPath.y)
+                    {
+                        if (position.y < endOfPath.y && !topWalls[endOfPath.x, endOfPath.y])
+                            canGo = true;
+                        else if (position.y > endOfPath.y && !topWalls[position.x, position.y])
+                            canGo = true;
+                    }
                 }
-               
-                Debug.Log(canGo);
-                if(canGo){
-                    if(paths[position.x,position.y] != 0){
-                        int dx = 1, dy = 0, t, value = paths[position.x, position.y];
-                        bool previous = true;
+
+                if (canGo)
+                {
+                    if (paths[position.x, position.y] != 0)
+                    {
+                        int dx = 1, dy = 0, value = paths[position.x, position.y];
+                        bool canRemove = true;
                         int wspx = endOfPath.x + dx, wspy = endOfPath.y + dy;
 
-                        for(int i = 0; i < 4; i++)
+                        for (int i = 0; i < 4; i++)
                         {
-                            if(wspx >= 0 && wspx < kx && wspy >= 0 && wspy < ky && paths[wspx, wspy] > value)
+                            if (wspx >= 0 && wspx < kx && wspy >= 0 && wspy < ky && paths[wspx, wspy] > value)
                             {
-                                previous = false;
+                                canRemove = false;
                                 break;
                             }
-                            
-                            t = dx;
+
+                            int t = dx;
                             dx = -dy;
                             dy = t;
+
+                            wspx = endOfPath.x + dx;
+                            wspy = endOfPath.y + dy;
                         }
 
-                        if(previous)
+                        if (canRemove)
                         {
-                            paths[wspx, wspy] = 0;
+                            paths[endOfPath.x, endOfPath.y] = 0;
+                            removePathTile(endOfPath.x, endOfPath.y);
+
                             endOfPath = position;
-                            lastValue--; 
+                            lastValue--;
                         }
                     }
                     else
                     {
                         paths[position.x, position.y] = lastValue++;
                         endOfPath = position;
-                        
-                        newPathTile(position.x, position.y); 
+
+                        newPathTile(position.x, position.y);
                     }
                 }
             }
             //if moving
             if (touch.phase == TouchPhase.Moved)
             {
-                
+
             }
         }
     }
@@ -115,11 +129,11 @@ public class movingScript : MonoBehaviour
         halfBlock = (new Vector2(blockLength, blockLength)) * 0.5f;
         kx = mapa.getKX();
         ky = mapa.getKY();
-        paths = new int[kx,ky];
+        paths = new int[kx, ky];
         cam_ = GameObject.Find("Main Camera").GetComponent<Camera>();
-        for(int i = 0; i < kx; i++)
-            for(int j = 0; j < ky; j++)
-                paths[i,j]=0;
+        for (int i = 0; i < kx; i++)
+            for (int j = 0; j < ky; j++)
+                paths[i, j] = 0;
 
         tiles = GameObject.Find("PathTiles");
 
@@ -132,9 +146,9 @@ public class movingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isUpdated)
+        if (!isUpdated)
         {
-            if(mapa.isReady())
+            if (mapa.isReady())
             {
                 isUpdated = true;
                 initialize();
