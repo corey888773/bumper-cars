@@ -7,7 +7,7 @@ using static System.Math;
 public class Player : MonoBehaviour
 {
      
-    protected Vector2 _playerMove;
+    public static Vector2 _playerMove;
     
     protected BoxCollider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;

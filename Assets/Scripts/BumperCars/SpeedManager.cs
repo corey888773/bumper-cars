@@ -10,8 +10,33 @@ public class SpeedManager : BoostManager
     {
         if (collision.tag == "Player")
         {
-            Player._velocity += 1;
-            Destroy(gameObject);
+            if (Player._velocity < 14)
+            {
+                Player._velocity += 1;
+                Destroy(gameObject);
+                BoostManager.BoostsCounter--;
+            }
+            else
+            {
+                Destroy(gameObject);
+                BoostManager.BoostsCounter--;
+            }
+            
+        }
+
+        else if (collision.tag == "ComputerPlayer")
+        {
+            if (ComputerPlayer._velocity < 14)
+            {
+                ComputerPlayer._velocity += 1;
+                Destroy(gameObject);
+                BoostManager.BoostsCounter--;
+            }
+            else
+            {
+                Destroy(gameObject);
+                BoostManager.BoostsCounter--;
+            }
         }
     }
 }

@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.Mathematics;
 using UnityEngine;
+using static System.Math;
 
 public class FreezeManager : BoostManager
 {
@@ -10,8 +12,14 @@ public class FreezeManager : BoostManager
     {
         if (collision.tag == "Player")
         {
-            Player._velocity = 0;
             Destroy(gameObject);
+            BoostManager.BoostsCounter--;
+        }
+        else if (collision.tag == "ComputerPlayer")
+        {
+            ComputerPlayer._velocity += 1;
+            Destroy(gameObject);
+            BoostManager.BoostsCounter--;
         }
     }
 }

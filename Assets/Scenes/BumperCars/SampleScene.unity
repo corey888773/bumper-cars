@@ -197,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: ComputerPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
@@ -2648,7 +2648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: ComputerPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
@@ -2880,6 +2880,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7860947259319914095, guid: 936eb3ad47154b44194c886df7f6afeb, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 936eb3ad47154b44194c886df7f6afeb, type: 3}
 --- !u!1001 &7882847069186864651
@@ -2959,7 +2963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: ComputerPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 180d5096be90c4c0f96248a90c786725, type: 3}

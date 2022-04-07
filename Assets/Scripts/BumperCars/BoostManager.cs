@@ -16,14 +16,14 @@ public class BoostManager : MonoBehaviour
     private int nextUpdate = 1;
     private int Counter = 0;
     private int timeDelta = 3;
-    private int BoostsCounter = 0;
+    public static int BoostsCounter = 0;
     public float Radius = 0.1f * Screen.width;
 
     protected virtual void Update()
     {
         if(Time.time>=nextUpdate){
             nextUpdate=Mathf.FloorToInt(Time.time)+ timeDelta;
-            Boosts();
+            if (BoostsCounter <= 5) Boosts();
         }
     }
 
