@@ -13,10 +13,10 @@ public class Player : MonoBehaviour
     protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
     
-
+     
     public joystickScript _joystick;
     public float _rotationSpeed = 720.0f;
-    public float _velocity = 10.0f;
+    public static float _velocity = 10.0f;
     
     protected virtual void Awake()
     {
