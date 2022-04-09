@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7882847067988969085, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
+      propertyPath: m_Mass
+      value: 1.03
+      objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969086, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: player
       value: 
@@ -317,7 +321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1500464751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2726,9 +2730,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9856e1a2b9fb8f10b3373c254f3c1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedBoost: {fileID: 1345168526038064886, guid: a7a9fe47c198a15989c32fafc904113a, type: 3}
-  FreezeBoost: {fileID: 4463336858112239473, guid: 9c7efaece6b17fdd6b7e50ab288907e7, type: 3}
-  Radius: 43.600002
+  speedBoost: {fileID: 1345168526038064886, guid: a7a9fe47c198a15989c32fafc904113a, type: 3}
+  freezeBoost: {fileID: 4463336858112239473, guid: 9c7efaece6b17fdd6b7e50ab288907e7, type: 3}
+  massBoost: {fileID: 4351573125865166548, guid: 7b7633251139dc73b817c48fd7f178fc, type: 3}
+  radius: 243.6
 --- !u!4 &1960866749
 Transform:
   m_ObjectHideFlags: 0

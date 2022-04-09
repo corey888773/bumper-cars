@@ -1,42 +1,41 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
-public class SpeedManager : BoostManager
+namespace BumperCars
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class SpeedManager : BoostManager
     {
-        if (collision.tag == "Player")
-        {
-            if (Player._velocity < 14)
-            {
-                Player._velocity += 1;
-                Destroy(gameObject);
-                BoostManager.BoostsCounter--;
-            }
-            else
-            {
-                Destroy(gameObject);
-                BoostManager.BoostsCounter--;
-            }
-            
-        }
 
-        else if (collision.tag == "ComputerPlayer")
+
+        // IEnumerator VelocityCoroutine()
+        // {
+        //     Debug.Log("Velocity Up");
+        //     yield return new WaitForSeconds(3);
+        //     Debug.Log("Velocity Up");
+        // }
+
+        public void OnTriggerEnter2D(Collider2D collision)
         {
-            if (ComputerPlayer._velocity < 14)
+            if (collision.tag == "Player")
             {
-                ComputerPlayer._velocity += 1;
-                Destroy(gameObject);
-                BoostManager.BoostsCounter--;
+                if (Player._velocity < 8)
+                {
+                    // StartCoroutine(VelocityCoroutine());
+                    Player._velocity += 1;
+                }
             }
-            else
-            {
-                Destroy(gameObject);
-                BoostManager.BoostsCounter--;
-            }
+            Destroy(gameObject);
+            BoostsCounter--;
+
+            // else if (collision.tag == "ComputerPlayer")
+            // {
+            //     if (ComputerPlayer._velocity < 14)
+            //     {
+            //         ComputerPlayer._velocity += 1;
+            //         Destroy(gameObject);
+            //         BoostsCounter--;
+            //     }
+            // }
         }
     }
 }

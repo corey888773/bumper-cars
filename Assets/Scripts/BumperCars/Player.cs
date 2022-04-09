@@ -7,40 +7,39 @@ using static System.Math;
 public class Player : MonoBehaviour
 {
      
-    public static Vector2 _playerMove;
+    public static Vector2 PlayerMove;
     
     protected BoxCollider2D _boxCollider2D;
-    protected Rigidbody2D _rigidbody2D;
+    public Rigidbody2D rigidbody2D;
     protected RaycastHit2D hit;
-    
-     
+
     public joystickScript _joystick;
     public float _rotationSpeed = 720.0f;
-    public static float _velocity = 10.0f;
+    public static float _velocity = 7.0f;
     
     protected virtual void Awake()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         // _joystick = GameObject.Find("JoystickCircleDirection").GetComponent<joystickScript>();
     }
 
     protected virtual void Move(Vector2 input)
     {
         float degrees = (float) Atan2(input.x, input.y);
-        _playerMove = new Vector2(input.x, input.y);
+        PlayerMove = new Vector2(input.x, input.y);
         
-        float inputMagnitude = Mathf.Clamp01(_playerMove.magnitude);
+        float inputMagnitude = Mathf.Clamp01(PlayerMove.magnitude);
         // transform.Translate(_playerMove * Time.deltaTime, Space.World);
 
 
-        if (_playerMove != Vector2.zero)
+        if (PlayerMove != Vector2.zero)
         {
-            Quaternion rotateDirection= Quaternion.LookRotation(Vector3.forward, _playerMove);
+            Quaternion rotateDirection= Quaternion.LookRotation(Vector3.forward, PlayerMove);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, Time.deltaTime * _rotationSpeed);
         }
         
-        _rigidbody2D.AddForce(_playerMove * inputMagnitude);
+        rigidbody2D.AddForce(PlayerMove * inputMagnitude);
         
         // // move collision test. box creates a box on top of our object which is moved slightly into the movement direction before the player.
         // //the box tests if it covers any colliders, and if so, it stops the movement.

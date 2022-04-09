@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BumperCars
 {
-    public class FreezeManager : BoostManager
+    public class MassManager : BoostManager
     {
         private Rigidbody2D rb;
         
@@ -13,8 +13,11 @@ namespace BumperCars
             if (collision.tag == "Player")
             {
                 rb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
-                rb.Sleep();
-                rb.mass = Int32.MaxValue;
+                if (rb.mass <= 3.0f)
+                {
+                    rb.mass *= 5.0f;
+                }
+                
             }
             Destroy(gameObject);
             BoostsCounter--;
