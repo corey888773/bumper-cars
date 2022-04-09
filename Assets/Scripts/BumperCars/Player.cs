@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,10 +12,14 @@ public class Player : MonoBehaviour
     protected BoxCollider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
+    
 
     public joystickScript _joystick;
     public float rotationSpeed = 720.0f;
-    public float velocity = 10.0f;
+    public static float velocity = 10.0f;
+    public static float StartingVelocity;
+    public static float StartingMass;
+    
     
     public LayerMask filterMask;
     private HoleManager _holeManager; 
@@ -28,7 +31,11 @@ public class Player : MonoBehaviour
         // get all required components
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _holeManager = FindObjectOfType<HoleManager>();
+        
+        StartingVelocity = velocity;
+        StartingMass = GameObject.Find("Player").GetComponent<Rigidbody2D>().mass;
     }
 
     protected virtual void Move(Vector2 input)
@@ -74,6 +81,5 @@ public class Player : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
         float x = Input.GetAxisRaw("Horizontal");
         Move(new Vector2(input.x, input.y));
-        CheckForObjectsCollisons();
     }
 }

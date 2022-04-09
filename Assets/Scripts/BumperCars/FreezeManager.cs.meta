@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 2ccc33324a9623e5ba4f99862548ee9c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - speedBoost: {fileID: 1345168526038064886, guid: a7a9fe47c198a15989c32fafc904113a, type: 3}
+  - freezeBoost: {fileID: 4463336858112239473, guid: 9c7efaece6b17fdd6b7e50ab288907e7, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
