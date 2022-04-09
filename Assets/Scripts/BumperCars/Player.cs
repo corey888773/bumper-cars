@@ -16,11 +16,15 @@ public class Player : MonoBehaviour
     public joystickScript _joystick;
     public float _rotationSpeed = 720.0f;
     public static float _velocity = 7.0f;
+    public static float StartingVelocity;
+    public static float StartingMass;
     
     protected virtual void Awake()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        StartingVelocity = _velocity;
+        StartingMass = GameObject.Find("Player").GetComponent<Rigidbody2D>().mass;
         // _joystick = GameObject.Find("JoystickCircleDirection").GetComponent<joystickScript>();
     }
 

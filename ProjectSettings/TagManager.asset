@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ComputerPlayer
+  - ComputerPlayer2
+  - ComputerPlayer1
   layers:
   - Default
   - TransparentFX

@@ -5,37 +5,31 @@ namespace BumperCars
 {
     public class SpeedManager : BoostManager
     {
+        public static bool boosting = false;
+        public static float boostTime = 0.0f;
+
 
 
         // IEnumerator VelocityCoroutine()
         // {
         //     Debug.Log("Velocity Up");
         //     yield return new WaitForSeconds(3);
-        //     Debug.Log("Velocity Up");
+        //     Debug.Log("Velocity Down");
         // }
 
         public void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Player")
             {
-                if (Player._velocity < 8)
+                if (Player._velocity < Player.StartingVelocity + 1)
                 {
                     // StartCoroutine(VelocityCoroutine());
-                    Player._velocity += 1;
+                    Player._velocity += 4;
+                    boosting = true;
                 }
             }
             Destroy(gameObject);
             BoostsCounter--;
-
-            // else if (collision.tag == "ComputerPlayer")
-            // {
-            //     if (ComputerPlayer._velocity < 14)
-            //     {
-            //         ComputerPlayer._velocity += 1;
-            //         Destroy(gameObject);
-            //         BoostsCounter--;
-            //     }
-            // }
         }
     }
 }

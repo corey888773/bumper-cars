@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using BumperCars;
 using UnityEditor.Experimental;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class BoostManager : MonoBehaviour
     public GameObject freezeBoost;
     public GameObject massBoost;
     private int _nextUpdate = 1;
-    private int timeDelta = 5;
+    private int timeDelta = 6;
     protected static int BoostsCounter = 0;
     public float radius = 0.1f * Screen.width;
 
@@ -24,7 +25,38 @@ public class BoostManager : MonoBehaviour
         if(Time.time>=_nextUpdate){
             _nextUpdate=Mathf.FloorToInt(Time.time)+ timeDelta;
             if (BoostsCounter <= 2) Boosts();
-            print(Player._velocity);
+        }
+
+        if (SpeedManager.boosting)
+        {
+            SpeedManager.boostTime += Time.deltaTime;
+            if (SpeedManager.boostTime >= 20)
+            {
+                Player._velocity = Player.StartingVelocity;
+                SpeedManager.boostTime = 0f;
+                SpeedManager.boosting = false;
+            }
+        }
+        if (MassManager.boosting)
+        {
+            MassManager.boostTime += Time.deltaTime;
+            if (MassManager.boostTime >= 20)
+            {
+                GameObject.Find("Player").GetComponent<Rigidbody2D>().mass = Player.StartingMass;
+                MassManager.boostTime = 0f;
+                MassManager.boosting = false;
+            }
+        }
+        if (FreezeManager.boosting)
+        {
+            FreezeManager.boostTime += Time.deltaTime;
+            if (FreezeManager.boostTime >= 20)
+            {
+                GameObject.Find("Player").GetComponent<Rigidbody2D>().mass = Player.StartingMass;
+                Player._velocity = Player.StartingVelocity;
+                FreezeManager.boostTime = 0f;
+                FreezeManager.boosting = false;
+            }
         }
     }
 
@@ -41,10 +73,10 @@ public class BoostManager : MonoBehaviour
 
     void Boosts()
     {
-        int x = Random.Range(0, 3);
-        if (x == 0) Speed();
-        else if (x == 1) Freeze();
-        else if (x == 2) Mass();
+        int x = Random.Range(0, 7);
+        if (x == 0) Freeze();
+        else if (x % 2 == 0) Speed();
+        else if (x % 2 == 1) Mass();
     }
 
     void Mass()
