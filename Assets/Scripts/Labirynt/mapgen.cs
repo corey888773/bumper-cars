@@ -13,12 +13,22 @@ public class mapgen : MonoBehaviour
         private int kx, ky; 
     private float wallWidth;
     private bool isInitialized = false;
+
+    private float scalingRatio = 1;
+
+    [SerializeField] private int middleHoleRadius;
+
+    private Camera cam_;
+
     //generates walls
     void labyrinthGenerator(){
         //zmienne
         wallWidth = wallHeight + blockLength;
+
         kx = (int) ( (labyrinthWidth - wallWidth + blockLength) / blockLength );
         ky = (int) ( (labyrinthHeight - wallHeight + blockLength) / blockLength );
+
+        start += 0.5f * (new Vector2(labyrinthWidth - kx * blockLength, labyrinthHeight - ky * blockLength));
 
         leftWalls = new bool [kx+1,ky+1];
         topWalls = new bool [kx+1,ky+1];
@@ -33,6 +43,7 @@ public class mapgen : MonoBehaviour
         //Tera generujemy labirynt
         //Random.seed = randomSeed;
         Random.InitState(randomSeed);
+        middleHole(kx / 2, ky / 2, middleHoleRadius);
         labDigger(kx / 2, ky / 2);
 
         Vector2 Lwsp = new Vector2(start.x+wallHeight/2, start.y + wallHeight/2 + blockLength/2);
@@ -110,6 +121,22 @@ public class mapgen : MonoBehaviour
         
     }
 }
+    public void middleHole(int x, int y, int r)
+    {
+        int poczX = Mathf.Max(x - r + 1, 0);
+        int poczY = Mathf.Max(y - r + 1, 0);
+        int konX = Mathf.Min(x + r, kx - 1);
+        int konY = Mathf.Min(y + r, ky - 1);
+        
+        for(int i = poczX; i <= konX; i++)
+        {
+            for(int j = poczY; j <= konY; j++)
+            leftWalls[i,j] = topWalls[i,j] = false;
+            leftWalls[i,y - r] = false;
+        }
+        for(int j = poczY; j <= konY; j++)
+            topWalls[x - r,j] = false;
+    }
     //GETTERS
     public Vector2 getStart(){
         return start;
@@ -131,9 +158,38 @@ public class mapgen : MonoBehaviour
         return ky;
     }
 
+    public float getWallHeight()
+    {
+        return wallHeight;
+    }
+
+    public float getScalingRatio()
+    {
+        return scalingRatio;
+    }
+
     //onStart
     void Start()
     {
+        //SCALING
+        cam_ = GameObject.Find("Main Camera").GetComponent<Camera>();
+
+        Vector2 screenSize = cam_.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+
+        float screenRatio = screenSize.y / screenSize.x;
+        float labyrinthRatio = labyrinthHeight / labyrinthWidth; 
+
+        if(screenRatio > labyrinthRatio)
+            scalingRatio = screenSize.x / labyrinthWidth;
+        else
+            scalingRatio = screenSize.y / labyrinthHeight;
+        scalingRatio *= 2.0f;
+
+        labyrinthHeight *= scalingRatio;
+        labyrinthWidth *= scalingRatio;
+        blockLength *= scalingRatio;
+        wallHeight *= scalingRatio;
+
         walls = GameObject.Find("Walls");
         start = new Vector2(transform.position.x - 0.5f * labyrinthWidth, transform.position.y - 0.5f * labyrinthHeight);
         labyrinthGenerator(); 

@@ -7,7 +7,7 @@ public class movingScript : MonoBehaviour
     private GameObject Labyrinth;
     private bool[,] leftWalls, topWalls;
     private Vector2 halfBlock;
-    private float blockLength;
+    private float blockLength, wallHeight;
     private int kx, ky;
     private int[,] paths;
     private Camera cam_;
@@ -22,8 +22,9 @@ public class movingScript : MonoBehaviour
 
     void newPathTile(int i, int j)
     {
-        GameObject new_tile = Instantiate(pathTile, (new Vector2(i, j)) * blockLength + mapa.getStart() + halfBlock, Quaternion.identity);
+        GameObject new_tile = Instantiate(pathTile, (new Vector2(i * blockLength + wallHeight * 0.5f, j * blockLength + wallHeight * 0.5f)) + mapa.getStart() + halfBlock, Quaternion.identity);
         new_tile.transform.parent = tiles.transform;
+        new_tile.transform.localScale *= mapa.getScalingRatio();
         new_tile.name = "pathTile" + i.ToString() + "," + j.ToString();
     }
 
@@ -126,10 +127,13 @@ public class movingScript : MonoBehaviour
         leftWalls = mapa.getLeftWalls();
         topWalls = mapa.getTopWalls();
         blockLength = mapa.getBlockLength();
+        wallHeight = mapa.getWallHeight();
+
         halfBlock = (new Vector2(blockLength, blockLength)) * 0.5f;
         kx = mapa.getKX();
         ky = mapa.getKY();
         paths = new int[kx, ky];
+
         cam_ = GameObject.Find("Main Camera").GetComponent<Camera>();
         for (int i = 0; i < kx; i++)
             for (int j = 0; j < ky; j++)
@@ -138,7 +142,6 @@ public class movingScript : MonoBehaviour
         tiles = GameObject.Find("PathTiles");
 
         position = endOfPath = (new Vector2Int(kx, ky)) / 2;
-        Debug.Log(position);
         paths[position.x, position.y] = 1;
         newPathTile(position.x, position.y);
     }
