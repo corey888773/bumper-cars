@@ -21,10 +21,10 @@ namespace BumperCars
         {
             if (collision.tag == "Player")
             {
-                if (Player._velocity < Player.StartingVelocity + 1)
+                if (Player.velocity < Player.StartingVelocity + 1)
                 {
                     // StartCoroutine(VelocityCoroutine());
-                    Player._velocity += 4;
+                    Player.velocity += 4;
                     boosting = true;
                 }
             }

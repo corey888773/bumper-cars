@@ -32,7 +32,7 @@ public class BoostManager : MonoBehaviour
             SpeedManager.boostTime += Time.deltaTime;
             if (SpeedManager.boostTime >= 20)
             {
-                Player._velocity = Player.StartingVelocity;
+                Player.velocity = Player.StartingVelocity;
                 SpeedManager.boostTime = 0f;
                 SpeedManager.boosting = false;
             }
@@ -53,7 +53,7 @@ public class BoostManager : MonoBehaviour
             if (FreezeManager.boostTime >= 20)
             {
                 GameObject.Find("Player").GetComponent<Rigidbody2D>().mass = Player.StartingMass;
-                Player._velocity = Player.StartingVelocity;
+                Player.velocity = Player.StartingVelocity;
                 FreezeManager.boostTime = 0f;
                 FreezeManager.boosting = false;
             }

@@ -326,8 +326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86df5b910d204122aa1c15ee022bba96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPrefab: {fileID: 4643769476317041112, guid: 2e6f20bc03d05190681f7e3e1e52907d, type: 3}
-  CountD: 0
+  holePrefab: {fileID: 4643769476317041112, guid: 2e6f20bc03d05190681f7e3e1e52907d, type: 3}
+  countDelta: 0
+  holeCount: 0
+  maxHoleAmount: 3
 --- !u!4 &1433577121
 Transform:
   m_ObjectHideFlags: 0
@@ -337,53 +339,6 @@ Transform:
   m_GameObject: {fileID: 1433577119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.93087965, y: 0.39278242, z: -0.029140133}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1500464750
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1500464752}
-  - component: {fileID: 1500464751}
-  m_Layer: 0
-  m_Name: HolesManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1500464751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500464750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 628c6672342f9c10eb8ee2f70cc82eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hole: {fileID: 4643769476317041112, guid: 2e6f20bc03d05190681f7e3e1e52907d, type: 3}
-  timeDelta: 3
-  _players: []
---- !u!4 &1500464752
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500464750}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3312937, y: 1.9164898, z: 0.007372662}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -419,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8644687995261642431, guid: 2e6f20bc03d05190681f7e3e1e52907d, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8644687995261642431, guid: 2e6f20bc03d05190681f7e3e1e52907d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -463,6 +418,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e6f20bc03d05190681f7e3e1e52907d, type: 3}
+--- !u!1 &1636456850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1636456852}
+  - component: {fileID: 1636456851}
+  m_Layer: 0
+  m_Name: BoostManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1636456851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636456850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9856e1a2b9fb8f10b3373c254f3c1e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedBoost: {fileID: 1345168526038064886, guid: a7a9fe47c198a15989c32fafc904113a, type: 3}
+  freezeBoost: {fileID: 4463336858112239473, guid: 9c7efaece6b17fdd6b7e50ab288907e7, type: 3}
+  massBoost: {fileID: 4351573125865166548, guid: 7b7633251139dc73b817c48fd7f178fc, type: 3}
+  radius: 23
+--- !u!4 &1636456852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636456850}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.13727255, y: -0.10432753, z: 0.07452615}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1647327648
 GameObject:
   m_ObjectHideFlags: 0
