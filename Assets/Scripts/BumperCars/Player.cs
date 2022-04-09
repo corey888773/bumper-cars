@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,61 +13,67 @@ public class Player : MonoBehaviour
     protected BoxCollider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
-    
 
     public joystickScript _joystick;
-    public float _rotationSpeed = 720.0f;
-    public float _velocity = 10.0f;
+    public float rotationSpeed = 720.0f;
+    public float velocity = 10.0f;
+    
+    public LayerMask filterMask;
+    private HoleManager _holeManager; 
+    private Collider2D checkCollider;
+    public float scanRadius = 3f;
     
     protected virtual void Awake()
     {
+        // get all required components
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        // _joystick = GameObject.Find("JoystickCircleDirection").GetComponent<joystickScript>();
+        _holeManager = FindObjectOfType<HoleManager>();
     }
 
     protected virtual void Move(Vector2 input)
     {
-        float degrees = (float) Atan2(input.x, input.y);
+        //specification of player movement vector
         _playerMove = new Vector2(input.x, input.y);
-        
         float inputMagnitude = Mathf.Clamp01(_playerMove.magnitude);
-        // transform.Translate(_playerMove * Time.deltaTime, Space.World);
-
-
+        
+        
+        // some Physical stuff
         if (_playerMove != Vector2.zero)
         {
             Quaternion rotateDirection= Quaternion.LookRotation(Vector3.forward, _playerMove);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, Time.deltaTime * _rotationSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, Time.deltaTime * rotationSpeed);
         }
         
         _rigidbody2D.AddForce(_playerMove * inputMagnitude);
-        
-        // // move collision test. box creates a box on top of our object which is moved slightly into the movement direction before the player.
-        // //the box tests if it covers any colliders, and if so, it stops the movement.
-        // hit = Physics2D.BoxCast(transform.position, _boxCollider2D.size,0, new Vector2(0,_playerMove.y),
-        //     Mathf.Abs(_playerMove.y * Time.deltaTime ), LayerMask.GetMask("Blocking"));
-        // if (hit.collider == null)
-        // {
-        //     transform.Translate(new Vector3(0, _playerMove.y * Time.deltaTime * inputMagnitude, 0), Space.World);
-        // }
-        // hit = Physics2D.BoxCast(transform.position, _boxCollider2D.size, 0, new Vector2(_playerMove.x, 0),
-        //     Mathf.Abs(_playerMove.x * Time.deltaTime ), LayerMask.GetMask("Blocking"));
-        // if (hit.collider == null)
-        // {
-        //     transform.Translate(new Vector3(_playerMove.x * Time.deltaTime * inputMagnitude,0 , 0), Space.World);
-        // }
-            
-        // transform.Translate(_playerMove * Time.deltaTime * inputMagnitude, Space.World);
-        
-        
+    }
+    
+    
+    //this is the function which prevents objects from spawning on top of player or within its short radius
+    protected void CheckForObjectsCollisons()
+    {
+        checkCollider = Physics2D.OverlapCircle(transform.position, scanRadius, filterMask);
+        if (checkCollider != null && checkCollider.transform != transform)
+        {
+            Destroy(checkCollider.gameObject);
+            _holeManager.countDelta = 0;
+            _holeManager.holeCount--;
+        }
+    }
+    
+    // function to spectate scan radius in unity ecitor
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, scanRadius);
     }
     
     protected virtual void FixedUpdate()
     {
-        Vector2 input = _joystick.getValue() * _velocity;
+        Vector2 input = _joystick.getValue() * velocity;
         float y = Input.GetAxisRaw("Vertical");
         float x = Input.GetAxisRaw("Horizontal");
         Move(new Vector2(input.x, input.y));
+        CheckForObjectsCollisons();
     }
 }
