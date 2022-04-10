@@ -15,14 +15,65 @@ public class movingScript : MonoBehaviour
     [SerializeField] private GameObject pathTile;
     private GameObject tiles;
 
-    private Vector2Int endOfPath, position;
+    private Vector2Int endOfPath, position, beginningOfPath;
     private int lastValue = 2;
 
     private bool isUpdated = false;
 
-    void newPathTile(int i, int j)
+    public bool isReady()
     {
-        GameObject new_tile = Instantiate(pathTile, (new Vector2(i * blockLength + wallHeight * 0.5f, j * blockLength + wallHeight * 0.5f)) + mapa.getStart() + halfBlock, Quaternion.identity);
+        return isUpdated;
+    }
+
+    public Vector2Int getBeginningOfPathInt()
+    {
+        return beginningOfPath;
+    }
+
+    public Vector2Int getEndOfPathInt()
+    {
+        return endOfPath;
+    }
+
+    public Vector2Int findNextTilePos()
+    {
+        Vector2Int pos = beginningOfPath, dr = new Vector2Int(1, 0), best_pos = beginningOfPath;
+        bool znaleziono = false;
+
+        for(int i = 0; i < 4; i++)
+        {
+            pos = beginningOfPath + dr;
+
+            if(mapa.canGoFromTo(beginningOfPath, pos) && paths[pos.x, pos.y] != 0 && (!znaleziono || paths[best_pos.x, best_pos.y] > paths[pos.x, pos.y]))
+            {
+                best_pos = pos;
+                znaleziono = true;
+            }
+
+            int tmp = dr.x;
+            dr.x = -dr.y;
+            dr.y = tmp;
+        }
+
+        return best_pos;
+    }
+
+    // set new path beginning if possible
+    public void nextPosition()
+    {
+        Vector2Int nextPos = findNextTilePos();
+
+        if(nextPos == beginningOfPath)
+            return;
+
+        paths[beginningOfPath.x, beginningOfPath.y] = 0;
+        removePathTile(beginningOfPath.x, beginningOfPath.y);
+        beginningOfPath = nextPos;
+    }
+
+    private void newPathTile(int i, int j)
+    {
+        GameObject new_tile = Instantiate(pathTile, mapa.getPosInLabyrinth(new Vector2Int(i, j)), Quaternion.identity);
         new_tile.transform.parent = tiles.transform;
         new_tile.transform.localScale *= mapa.getScalingRatio();
         new_tile.name = "pathTile" + i.ToString() + "," + j.ToString();
@@ -106,11 +157,6 @@ public class movingScript : MonoBehaviour
                     }
                 }
             }
-            //if moving
-            if (touch.phase == TouchPhase.Moved)
-            {
-
-            }
         }
     }
 
@@ -141,7 +187,7 @@ public class movingScript : MonoBehaviour
 
         tiles = GameObject.Find("PathTiles");
 
-        position = endOfPath = (new Vector2Int(kx, ky)) / 2;
+        beginningOfPath = position = endOfPath = (new Vector2Int(kx, ky)) / 2;
         paths[position.x, position.y] = 1;
         newPathTile(position.x, position.y);
     }
