@@ -12,12 +12,14 @@ public class Hole : MonoBehaviour
     private HoleManager _holeManager; 
     private Collider2D _checkCollider;
     private SpriteRenderer _spriteRenderer;
+    private Player _player;
     
     
     void Awake()
     {
         // get all required components
         _holeManager = FindObjectOfType<HoleManager>();
+        _player = FindObjectOfType<Player>();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
         
@@ -37,8 +39,10 @@ public class Hole : MonoBehaviour
         }
         
         // confirm hole after 1 second of existence
-        if (Time.time - spawnTime > 1 && !confirmed)
+        if (Time.time - spawnTime > 1f && !confirmed)
             ConfirmHole();
+        
+        
     }
     
     //function to confirm hole existence. changes layer to prevent Player erasing this objects and enables sprite
@@ -51,6 +55,11 @@ public class Hole : MonoBehaviour
         } 
     }
     
+    //function which activates when stepping on object. Requires collider to be set on Trigger Mode
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        collision.SendMessage("AddEffect",EffectType.Hole);
+    }
     
     //function to spectate scan radius in unity editor
     protected void OnDrawGizmos()

@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
      
     protected Vector2 _playerMove;
     
-    protected BoxCollider2D _boxCollider2D;
+    public Collider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
     
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     protected virtual void Awake()
     {
         // get all required components
-        _boxCollider2D = GetComponent<BoxCollider2D>();
+        _boxCollider2D = GetComponent<Collider2D>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _holeManager = FindObjectOfType<HoleManager>();
@@ -68,18 +68,29 @@ public class Player : MonoBehaviour
         }
     }
     
-    // function to spectate scan radius in unity ecitor
+    // function to spectate scan radius in unity editor
     protected void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, scanRadius);
     }
-    
+
+    // function to add effects after stepping on objects like boosts, holes, etc.
+    protected void AddEffect(EffectType type)
+    {
+        if (type == EffectType.Hole)
+        {
+            _rigidbody2D.velocity = Vector2.zero;
+            _rigidbody2D.angularVelocity = 0;
+        }
+    }
+
     protected virtual void FixedUpdate()
     {
         Vector2 input = _joystick.getValue() * velocity;
         float y = Input.GetAxisRaw("Vertical");
         float x = Input.GetAxisRaw("Horizontal");
         Move(new Vector2(input.x, input.y));
+        CheckForObjectsCollisons();
     }
 }
