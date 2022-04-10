@@ -13,10 +13,13 @@ namespace Czolgi
         private Camera joystickCamera;
         private float maxTouchDifferene;
         Resolution res;
+        private Vector2 _joystickPos;
 
         public static float horizontal, vertical;
         private void Awake()
         {
+            _joystickPos = transform.position;
+            _joystickPos = Camera.main.WorldToScreenPoint(_joystickPos);
             padStartPosition = pad.localPosition;
             res = Screen.currentResolution;
             joystickCamera = FindObjectOfType<Camera>();
@@ -35,7 +38,7 @@ namespace Czolgi
             {
                 Touch touch = Input.GetTouch(0);
 
-                if (touch.phase == TouchPhase.Moved && touch.position.x > Screen.width / 2)
+                if (touch.phase == TouchPhase.Moved && Vector2.Distance(_joystickPos, touch.position) <350)
                 {
                     var xDifference = touch.position.x - screenPoint.x;
                     horizontal = xDifference / maxTouchDifferene;

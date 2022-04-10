@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Czolgi
@@ -13,10 +15,13 @@ namespace Czolgi
         private Camera joystickCamera;
         private float maxTouchDifferene;
         Resolution res;
+        private Vector2 _joystickPos;
 
         public static float horizontal, vertical;
         private void Awake()
         {
+            _joystickPos = transform.position;
+            _joystickPos = Camera.main.WorldToScreenPoint(_joystickPos);
             padStartPosition = pad.localPosition;
             res = Screen.currentResolution;
             joystickCamera = FindObjectOfType<Camera>();
@@ -24,6 +29,8 @@ namespace Czolgi
             maxTouchDifferene = joystickCamera.WorldToScreenPoint(transform.position + new Vector3(1.5f, 0, 0)).x - screenPoint.x;
 
         }
+
+
         void Update()
         {
             if (res.width != Screen.width || res.height != Screen.height)
@@ -34,8 +41,9 @@ namespace Czolgi
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
-
-                if (touch.phase == TouchPhase.Moved && touch.position.x < Screen.width / 2)
+                
+                if (touch.phase == TouchPhase.Moved && Vector2.Distance(_joystickPos, touch.position) <350)
+                    // distance statement checks if touch is inside the circle of 350px
                 {
                     var xDifference = touch.position.x - screenPoint.x;
                     horizontal = xDifference / maxTouchDifferene;

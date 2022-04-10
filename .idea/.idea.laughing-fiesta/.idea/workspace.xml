@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="382eb410-e7a4-4b05-926d-47c6489b5c90" name="Changes" comment="" />
+    <list default="true" id="382eb410-e7a4-4b05-926d-47c6489b5c90" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Czolgi/Shooting.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Czolgi/Shooting.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.laughing-fiesta/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.laughing-fiesta/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Czolgi/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Czolgi/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Czolgi/MoveJoystick.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Czolgi/MoveJoystick.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +39,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="rider.run.widget.enabled.cache" value="false" />
+    <property name="settings.editor.selected.configurable" value="CodeLensConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -67,6 +75,8 @@
       <workItem from="1648915518142" duration="595000" />
       <workItem from="1649153713872" duration="643000" />
       <workItem from="1649181708994" duration="19442000" />
+      <workItem from="1649536585214" duration="12138000" />
+      <workItem from="1649592031767" duration="2894000" />
     </task>
     <servers />
   </component>
