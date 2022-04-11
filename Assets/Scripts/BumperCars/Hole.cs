@@ -52,6 +52,7 @@ public class Hole : MonoBehaviour
             gameObject.layer = 7;
             _spriteRenderer.enabled = true;
             confirmed = true;
+            GameManager.instance.ShowText("confirmed",50,Color.red,transform.position,Vector3.up * Time.deltaTime, 1f);
         } 
     }
     
@@ -67,5 +68,7 @@ public class Hole : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, scanRadius);
     }
+    
+    
 }
 

@@ -9,7 +9,6 @@ namespace BumperCars
         public static float boostTime = 0.0f;
 
 
-
         // IEnumerator VelocityCoroutine()
         // {
         //     Debug.Log("Velocity Up");

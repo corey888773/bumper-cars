@@ -10,13 +10,7 @@ public class HoleManager : MonoBehaviour
     public int maxHoleAmount = 4;
     void Update()
     {
-        // spawning delay
-        countDelta -= Time.deltaTime;
-        if (countDelta <= 0)
-        {
-            GenerateRandomSpot();
-            countDelta = 0.5f;
-        }
+        
     }
     public void GenerateRandomSpot()
     {
@@ -33,16 +27,27 @@ public class HoleManager : MonoBehaviour
         //specifies the amount of holes
         if (holeCount < maxHoleAmount)
         {
-            SpawnHole(randomPosition);
+            InstantiateHole(randomPosition);
         }
     }
    
     
     //spawn holes in previously generated position
-    private void SpawnHole(Vector3 position)
+    private void InstantiateHole(Vector3 position)
     {
         Instantiate(holePrefab, position, Quaternion.identity);
         holeCount++;
+    }
+
+    public void SpawnHoles()
+    {
+        // spawning delay
+        countDelta -= Time.deltaTime;
+        if (countDelta <= 0)
+        {
+            GenerateRandomSpot();
+            countDelta = 0.5f;
+        }
     }
 }
 
