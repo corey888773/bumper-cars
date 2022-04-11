@@ -42,11 +42,11 @@ public class HoleManager : MonoBehaviour
     public void SpawnHoles()
     {
         // spawning delay
-        countDelta -= Time.deltaTime;
+        countDelta -= Time.deltaTime; 
         if (countDelta <= 0)
         {
             GenerateRandomSpot();
-            countDelta = 0.5f;
+            countDelta = 3f;
         }
     }
 }

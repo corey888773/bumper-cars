@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Hole : MonoBehaviour
@@ -13,8 +14,11 @@ public class Hole : MonoBehaviour
     private Collider2D _checkCollider;
     private SpriteRenderer _spriteRenderer;
     private Player _player;
-    
-    
+    public static float red;
+    public static float green;
+    public static float blue;
+
+
     void Awake()
     {
         // get all required components
@@ -25,7 +29,6 @@ public class Hole : MonoBehaviour
         
         // note time of object spawn
         spawnTime = Time.time;
-        
     }
     void Update()
     {
@@ -41,8 +44,6 @@ public class Hole : MonoBehaviour
         // confirm hole after 1 second of existence
         if (Time.time - spawnTime > 1f && !confirmed)
             ConfirmHole();
-        
-        
     }
     
     //function to confirm hole existence. changes layer to prevent Player erasing this objects and enables sprite
@@ -52,7 +53,8 @@ public class Hole : MonoBehaviour
             gameObject.layer = 7;
             _spriteRenderer.enabled = true;
             confirmed = true;
-            GameManager.instance.ShowText("confirmed",50,Color.red,transform.position,Vector3.up * Time.deltaTime, 1f);
+            GameManager.instance.ShowText(_holeManager.holeCount.ToString(),50,
+                new Color(red, green, blue), transform.position, Vector3.up * Time.deltaTime, 1f);
         } 
     }
     
@@ -60,6 +62,12 @@ public class Hole : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         collision.SendMessage("AddEffect",EffectType.Hole);
+
+        // if (collision.tag == "Player" /* && GameObject text == "Activate" */)
+        // {
+        //     Destroy(gameObject);
+        //     Destroy(_player);
+        // }
     }
     
     //function to spectate scan radius in unity editor
@@ -68,6 +76,8 @@ public class Hole : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, scanRadius);
     }
+    
+    
     
     
 }

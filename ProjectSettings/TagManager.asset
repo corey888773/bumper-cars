@@ -7,6 +7,7 @@ TagManager:
   - ComputerPlayer
   - ComputerPlayer2
   - ComputerPlayer1
+  - Hole
   layers:
   - Default
   - TransparentFX
