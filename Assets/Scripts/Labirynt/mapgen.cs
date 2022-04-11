@@ -9,9 +9,10 @@ public class mapgen : MonoBehaviour
 
     private Vector2 halfBlock;
 
-    public GameObject leftWall, topWall, walls;
+    public GameObject leftWall, topWall, walls, exitTile;
     public int randomSeed;
     private bool[,] leftWalls, topWalls, visited;
+    private GameObject twoExitTiles;
     //bloki w pionie i poziomie
     private int kx, ky;
     private float wallWidth;
@@ -20,7 +21,8 @@ public class mapgen : MonoBehaviour
     private float scalingRatio = 1;
 
     [SerializeField] private int middleHoleRadius;
-
+    //pozycja wyjsc pierwszego i drugiego
+    Vector2Int first, second;
     private Camera cam_;
 
     //generates walls
@@ -139,6 +141,16 @@ public class mapgen : MonoBehaviour
         for (int j = poczY; j <= konY; j++)
             topWalls[x - r, j] = false;
     }
+    public void exitTileGen(){
+        first = new Vector2Int(kx-1, ky/2); 
+        second = new Vector2Int(0, ky/2);
+        GameObject firstExitTile = Instantiate(exitTile, getPosInLabyrinth(first), Quaternion.identity);
+        firstExitTile.transform.parent = twoExitTiles.transform;
+        firstExitTile.transform.localScale *= scalingRatio;
+        GameObject secondExitTile = Instantiate(exitTile, getPosInLabyrinth(second), Quaternion.identity);
+        secondExitTile.transform.parent = twoExitTiles.transform;
+        secondExitTile.transform.localScale *= scalingRatio;
+    }
     //GETTERS
     public Vector2 getStart()
     {
@@ -189,13 +201,18 @@ public class mapgen : MonoBehaviour
     {
         return (new Vector2(posInt.x * blockLength + wallHeight * 0.5f, posInt.y * blockLength + wallHeight * 0.5f)) + start + halfBlock;
     }
-
+    public Vector2Int firstExit(){
+        return first;
+    }
+    public Vector2Int secondExit(){
+        return second;
+    }
     //onStart
     void Start()
     {
         //SCALING
         cam_ = GameObject.Find("Main Camera").GetComponent<Camera>();
-
+        twoExitTiles = GameObject.Find("twoExitTiles");
         Vector2 screenSize = cam_.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
         float screenRatio = screenSize.y / screenSize.x;
@@ -217,6 +234,7 @@ public class mapgen : MonoBehaviour
         walls = GameObject.Find("Walls");
         start = new Vector2(transform.position.x - 0.5f * labyrinthWidth, transform.position.y - 0.5f * labyrinthHeight);
         labyrinthGenerator();
+        exitTileGen();
         isInitialized = true;
     }
 

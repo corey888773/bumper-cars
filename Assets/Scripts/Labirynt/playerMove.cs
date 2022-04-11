@@ -16,7 +16,7 @@ public class playerMove : MonoBehaviour
 
     private Vector2Int positionIntCurrentGoal;
     private Vector2 positionCurrentGoal;
-
+    
     private void initialize()
     {
         transform.localScale *= mapa.getScalingRatio();
@@ -54,7 +54,12 @@ public class playerMove : MonoBehaviour
 
         transform.position = Vector2.Lerp(transform.position, positionCurrentGoal, deltaParamT);
     }
-
+    public Vector2Int getPlayerPos(){
+        return pathsScript.getBeginningOfPathInt();
+    }
+    public bool isReady(){
+        return isUpdated;
+    } 
     // Start is called before the first frame update
     private void Start()
     {
