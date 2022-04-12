@@ -23,11 +23,13 @@ public class GameManager : MonoBehaviour
     public List<Hole> holes;
     public HoleManager holeManager;
     public FloatingTextManager textManager;
+    public BoostManagerv2 boostManager;
 
     private void Update()
     {
         if (Time.time > firstHolesSpawn)
             holeManager.SpawnHoles();
+            boostManager.SpawnBoost();
     }
 
     //floating text method

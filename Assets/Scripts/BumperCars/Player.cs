@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using static System.Math;
 
 
@@ -13,6 +14,12 @@ public class Player : MonoBehaviour
     public Collider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
+    
+    
+    protected bool activateSpeed;
+    protected float speedDuration = 5.0f;
+    protected float speedActivateTime;
+    public float speedBoostValue = 2.0f;
     
 
     public joystickScript _joystick;
@@ -85,12 +92,24 @@ public class Player : MonoBehaviour
                 _rigidbody2D.velocity /= 1.3f;
                 _rigidbody2D.angularDrag = 0;
                 break;
+            case EffectType.Speed:
+                speedActivateTime = Time.time;
+                activateSpeed = true;
+                if (activateSpeed)
+                {
+                    Debug.Log("speedBoost");
+                    velocity *= speedBoostValue;
+                }
+
+                break;
             default:
                 Debug.Log("no effect implemented");
                 break;
         }
     }
 
+    
+    
     protected virtual void FixedUpdate()
     {
         Vector2 input = _joystick.getValue() * velocity;
@@ -98,5 +117,18 @@ public class Player : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         Move(new Vector2(input.x, input.y));
         CheckForObjectsCollisons();
+
+
+        if (activateSpeed)
+        {
+            if (Time.time - speedActivateTime > speedDuration)
+            {
+                velocity /= speedBoostValue;
+                activateSpeed = false;
+                
+            }
+        }
     }
 }
+
+

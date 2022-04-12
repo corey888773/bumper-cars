@@ -27,15 +27,16 @@ public class FloatingText
     {
         if (!active)
             return;
-        if (Time.time - lastShown > duration) Hole.green += 0.4f / 255f;
-
-        foreach (var floatingText in FloatingTextManager.floatingTexts)
-        {
-            if (Hole.green <= 1)
-                floatingText.txt.color = new Color(Hole.red, Hole.green, Hole.blue);
-            // else
-            //     floatingText.txt.text = "Active";
-        }
+        
+        // if (Time.time - lastShown > duration) Hole.green += 0.4f / 255f;
+        //
+        // foreach (var floatingText in FloatingTextManager.floatingTexts)
+        // {
+        //     if (Hole.green <= 1)
+        //         floatingText.txt.color = new Color(Hole.red, Hole.green, Hole.blue);
+        //     else
+        //         floatingText.txt.text = "Active";
+        // }
 
         gameObject.transform.position += motion * Time.deltaTime;
     }

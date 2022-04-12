@@ -1,18 +1,44 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Boost : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private float spawnTime;
+    private bool confirmed;
+    private BoostManagerv2 _boostManager;
+    private Collider2D _checkCollider;
+    private SpriteRenderer _spriteRenderer;
+
+    void Awake()
     {
-        
+        _boostManager = FindObjectOfType<BoostManagerv2>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        // _spriteRenderer.enabled = false;
+        spawnTime = Time.time;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        Debug.Log("effect not implemented");
+    }
+
+    protected void update()
+    {
+        // confirm hole after 1 second of existence
+        if (Time.time - spawnTime > 1f && !confirmed)
+            ConfirmBoost();
+    }
+    private void ConfirmBoost()
+    {
+        {
+            // gameObject.layer = 7;
+            // _spriteRenderer.enabled = true;
+            confirmed = true;
+            
+        } 
     }
 }
+
+
