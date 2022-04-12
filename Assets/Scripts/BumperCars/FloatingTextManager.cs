@@ -24,6 +24,7 @@ public class FloatingTextManager : MonoBehaviour
         floatingText.txt.text = message;
         floatingText.txt.fontSize = fontSize;
         floatingText.txt.color = color;
+        
         //text in Unity have different positioning system to the objects so we need
         //to adjust it's position to the world size
         floatingText.gameObject.transform.position = Camera.main.WorldToScreenPoint(position);

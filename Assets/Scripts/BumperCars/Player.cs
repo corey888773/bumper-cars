@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -78,10 +79,15 @@ public class Player : MonoBehaviour
     // function to add effects after stepping on objects like boosts, holes, etc.
     protected void AddEffect(EffectType type)
     {
-        if (type == EffectType.Hole)
+        switch (type)
         {
-            _rigidbody2D.velocity = Vector2.zero;
-            _rigidbody2D.angularVelocity = 0;
+            case EffectType.Hole:
+                _rigidbody2D.velocity /= 1.3f;
+                _rigidbody2D.angularDrag = 0;
+                break;
+            default:
+                Debug.Log("no effect implemented");
+                break;
         }
     }
 

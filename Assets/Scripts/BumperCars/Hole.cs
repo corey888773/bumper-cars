@@ -13,7 +13,6 @@ public class Hole : MonoBehaviour
     private HoleManager _holeManager; 
     private Collider2D _checkCollider;
     private SpriteRenderer _spriteRenderer;
-    private Player _player;
     public static float red;
     public static float green;
     public static float blue;
@@ -23,7 +22,6 @@ public class Hole : MonoBehaviour
     {
         // get all required components
         _holeManager = FindObjectOfType<HoleManager>();
-        _player = FindObjectOfType<Player>();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
         
@@ -59,15 +57,10 @@ public class Hole : MonoBehaviour
     }
     
     //function which activates when stepping on object. Requires collider to be set on Trigger Mode
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         collision.SendMessage("AddEffect",EffectType.Hole);
-
-        // if (collision.tag == "Player" /* && GameObject text == "Activate" */)
-        // {
-        //     Destroy(gameObject);
-        //     Destroy(_player);
-        // }
+        
     }
     
     //function to spectate scan radius in unity editor
