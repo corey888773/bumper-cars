@@ -9,6 +9,8 @@ public class gameEnds : MonoBehaviour
     private mapgen mapa;
     private Vector2Int playerPosition, firstExitTile, secondExitTile;
     private bool win, initialized = false;
+    [SerializeField]
+    GameObject gameOverScreenPrefab;
     public bool playerWins(Vector2Int position, Vector2Int firstExit, Vector2Int secondExit){
         if(position == firstExit || position == secondExit)
             return true;
@@ -35,6 +37,7 @@ public class gameEnds : MonoBehaviour
             win = playerWins(playerPosition, firstExitTile, secondExitTile);
             if(win){
                 Object.Destroy(Labyrinth);
+                Instantiate(gameOverScreenPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             }
         } 
     }
