@@ -33,8 +33,8 @@ public class FloatingText
         {
             if (Hole.green <= 1)
                 floatingText.txt.color = new Color(Hole.red, Hole.green, Hole.blue);
-            else
-                floatingText.txt.text = "Active";
+            // else
+            //     floatingText.txt.text = "Active";
         }
 
         gameObject.transform.position += motion * Time.deltaTime;
