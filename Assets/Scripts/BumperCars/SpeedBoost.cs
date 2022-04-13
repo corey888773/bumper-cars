@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpeedBoost : Boost
 {
-    protected void OnTriggerEnter2D(Collider2D colision)
+    protected override void OnTriggerEnter2D(Collider2D colision)
     {
         if (!Player.BoostPicked)
         {

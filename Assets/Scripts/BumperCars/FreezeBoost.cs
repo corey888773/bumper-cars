@@ -6,7 +6,7 @@ using Random = System.Random;
 
 public class FreezeBoost : Boost
 {
-    protected void OnTriggerEnter2D(Collider2D colision)
+    protected override void OnTriggerEnter2D(Collider2D colision)
     {
         if (!Player.BoostPicked)
         {

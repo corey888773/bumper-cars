@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
     
     
     //this is the function which prevents objects from spawning on top of player or within its short radius
-    protected void CheckForObjectsCollisons()
+    protected void CheckForObjectsCollisions()
     {
         checkCollider = Physics2D.OverlapCircle(transform.position, scanRadius, filterMask);
         if (checkCollider != null && checkCollider.transform != transform)
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
         float x = Input.GetAxisRaw("Horizontal");
         Move(new Vector2(input.x, input.y));
-        CheckForObjectsCollisons();
+        CheckForObjectsCollisions();
 
         if (activateSpeed || activateMass || activateFreeze) BoostPicked = true;
         else BoostPicked = false;

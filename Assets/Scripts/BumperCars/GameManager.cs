@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     //some variables
     public List<float> holesSpawnTime;
-    public int round = 0;
+    public bool roundState = true;
    
     //references to game objects
     public List<Player> players;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             holeManager.SpawnHoles();
             boostManager.SpawnBoost();
         }
-        if (Time.time > holesSpawnTime[0] + 10f)
+        if (Time.time > holesSpawnTime[0] + 10f && roundState)
         {
             for (var i = 0; i < players.Count; i++)
             {
@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
                 ShowText("looser", 45,Color.red, players[i].transform.position, Vector3.up * Time.deltaTime, 2f, TextTypes.Text);
                 players.RemoveAt(i);
             }
+
+            roundState = false;
         }
     }
 }

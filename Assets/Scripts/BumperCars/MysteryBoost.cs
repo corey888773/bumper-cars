@@ -6,7 +6,7 @@ using Random = System.Random;
 
 public class MysteryBoost : Boost
 {
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (!Player.BoostPicked)
         {

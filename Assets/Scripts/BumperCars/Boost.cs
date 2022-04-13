@@ -19,8 +19,8 @@ public class Boost : MonoBehaviour
         // _spriteRenderer.enabled = false;
         spawnTime = Time.time;
     }
-
-    protected void OnTriggerEnter2D(Collider2D collision)
+    
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("effect not implemented");
     }
