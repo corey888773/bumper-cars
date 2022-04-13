@@ -15,6 +15,11 @@ public class FloatingText
     public TextTypes type;
     public string endOfTimeMessage;
 
+
+    private float r = 255f;
+    private float g = 0f ;
+    private float b = 0f;
+
     public void Show()
     {
         active = true;
@@ -46,7 +51,7 @@ public class FloatingText
             case TextTypes.Timer:
                 if (!active)
                     return;
-                
+
                 duration -= Time.deltaTime;
                 txt.text = duration.ToString("0.0");
 

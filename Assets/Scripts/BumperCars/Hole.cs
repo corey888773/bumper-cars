@@ -18,9 +18,6 @@ public class Hole : MonoBehaviour
     public float duration = 5f;
     private bool savingEnabled = true;
     
-    public static float red;
-    public static float green;
-    public static float blue;
 
 
     void Awake()
@@ -62,8 +59,7 @@ public class Hole : MonoBehaviour
         {
             gameObject.layer = 7;
             _spriteRenderer.enabled = true;
-            GameManager.instance.ShowText("", 50,
-                new Color(red, green, blue), transform.position, Vector3.zero, duration, TextTypes.Timer, "BOOM");
+            GameManager.instance.ShowText("", 50,Color.black, transform.position, Vector3.zero, duration, TextTypes.Timer, "BOOM");
             countDown = Time.time;
             confirmed = true;
             
