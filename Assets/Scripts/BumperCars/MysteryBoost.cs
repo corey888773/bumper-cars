@@ -10,10 +10,12 @@ public class MysteryBoost : Boost
     {
         if (!Player.BoostPicked)
         {
-            boostPicker = UnityEngine.Random.Range(0, 3);
+            boostPicker = UnityEngine.Random.Range(0, 4);
+            boostPicker = 3;
             if (boostPicker == 0) collision.SendMessage("AddEffect", EffectType.Freeze);
             if (boostPicker == 1) collision.SendMessage("AddEffect", EffectType.Mass);
             if (boostPicker == 2) collision.SendMessage("AddEffect", EffectType.Speed);
+            if (boostPicker == 3) collision.SendMessage("AddEffect", EffectType.Inverse);
             Destroy(gameObject);
             BoostManagerv2.boostCount -= 1;
         }
