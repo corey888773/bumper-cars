@@ -15,11 +15,19 @@ public class Player : MonoBehaviour
     protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
     
-    //speedBoost
+    //Boosts
+    public float BoostValue = 2.0f;
+    protected float Duration = 5.0f;
+    public static bool BoostPicked;
+    
     protected bool activateSpeed;
-    protected float speedDuration = 5.0f;
     protected float speedActivateTime;
-    public float speedBoostValue = 2.0f;
+
+    protected bool activateMass;
+    protected float massActivateTime;
+    
+    protected bool activateFreeze;
+    protected float freezeActivateTime;
     
     //safeState
     public bool safe;
@@ -47,7 +55,7 @@ public class Player : MonoBehaviour
         _holeManager = FindObjectOfType<HoleManager>();
         
         StartingVelocity = velocity;
-        StartingMass = GameObject.Find("Player").GetComponent<Rigidbody2D>().mass;
+        StartingMass = _rigidbody2D.mass;
     }
 
     protected virtual void Move(Vector2 input)
@@ -97,12 +105,36 @@ public class Player : MonoBehaviour
                 _rigidbody2D.angularDrag = 0;
                 break;
             case EffectType.Speed:
-                speedActivateTime = Time.time;
-                activateSpeed = true;
-                if (activateSpeed)
+                if (velocity <= StartingVelocity)
                 {
-                    Debug.Log("speedBoost");
-                    velocity *= speedBoostValue;
+                    speedActivateTime = Time.time;
+                    activateSpeed = true;
+                    if (activateSpeed)
+                    {
+                        velocity *= BoostValue;
+                    }
+                }
+                break;
+            case EffectType.Mass:
+                if (_rigidbody2D.mass <= StartingMass)
+                {
+                    massActivateTime = Time.time;
+                    activateMass = true;
+                    if (activateMass)
+                    {
+                        _rigidbody2D.mass *= BoostValue;
+                        velocity *= BoostValue;
+                    }
+                }
+                break;
+            case EffectType.Freeze:
+                freezeActivateTime = Time.time;
+                activateFreeze = true;
+                if (activateFreeze)
+                {
+                    _rigidbody2D.velocity /= float.MaxValue;
+                    _rigidbody2D.angularDrag = 0;
+                    _rigidbody2D.mass = float.MaxValue;
                 }
                 break;
             case EffectType.Safe:
@@ -129,13 +161,35 @@ public class Player : MonoBehaviour
         Move(new Vector2(input.x, input.y));
         CheckForObjectsCollisons();
 
+        if (activateSpeed || activateMass || activateFreeze) BoostPicked = true;
+        else BoostPicked = false;
 
         if (activateSpeed)
         {
-            if (Time.time - speedActivateTime > speedDuration)
+            if (Time.time - speedActivateTime > Duration)
             {
-                velocity /= speedBoostValue;
+                velocity /= BoostValue;
                 activateSpeed = false;
+            }
+        }
+
+        if (activateMass)
+        {
+            if (Time.time - massActivateTime > Duration)
+            {
+                _rigidbody2D.mass /= BoostValue;
+                velocity /= BoostValue;
+                activateMass = false;
+            }
+        }
+        
+        if (activateFreeze)
+        {
+            if (Time.time - freezeActivateTime > Duration)
+            {
+                _rigidbody2D.mass = StartingMass;
+                velocity = StartingVelocity;
+                activateFreeze = false;
             }
         }
 

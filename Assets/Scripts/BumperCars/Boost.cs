@@ -10,6 +10,7 @@ public class Boost : MonoBehaviour
     private BoostManagerv2 _boostManager;
     private Collider2D _checkCollider;
     private SpriteRenderer _spriteRenderer;
+    protected int boostPicker;
 
     void Awake()
     {

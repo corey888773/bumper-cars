@@ -6,8 +6,14 @@ public class BoostManagerv2 : MonoBehaviour
 {
     public List<GameObject> boostPrefab;
     public float Count;
-    public int boostCount = 0;
-    public int maxBoostAmount = 1;
+    public static int boostCount;
+    public int maxBoostAmount = 2;
+    
+    void Start()
+    {
+        boostCount = 0;
+        boostPrefab = new List<GameObject>(Resources.LoadAll<GameObject>("bumper-cars"));
+    }
     void Update()
     {
         
@@ -27,15 +33,16 @@ public class BoostManagerv2 : MonoBehaviour
         //specifies the amount of holes
         if (boostCount < maxBoostAmount)
         {
-            InstantiateHole(randomPosition);
+            InstantiateBoost(randomPosition);
         }
     }
    
     
     //spawn holes in previously generated position
-    private void InstantiateHole(Vector3 position)
+    private void InstantiateBoost(Vector3 position)
     {
-        Instantiate(boostPrefab[0], position, Quaternion.identity);
+        var boostPicker = Random.Range(0, 4);
+        Instantiate(boostPrefab[boostPicker], position, Quaternion.identity);
         boostCount++;
     }
 
