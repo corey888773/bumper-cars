@@ -15,13 +15,17 @@ public class Player : MonoBehaviour
     protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
     
-    
+    //speedBoost
     protected bool activateSpeed;
     protected float speedDuration = 5.0f;
     protected float speedActivateTime;
     public float speedBoostValue = 2.0f;
     
-
+    //safeState
+    public bool safe;
+    protected float safeDuration = 10f;
+    protected float lastSafe;
+    
     public joystickScript _joystick;
     public float rotationSpeed = 720.0f;
     public static float velocity = 10.0f;
@@ -100,7 +104,14 @@ public class Player : MonoBehaviour
                     Debug.Log("speedBoost");
                     velocity *= speedBoostValue;
                 }
-
+                break;
+            case EffectType.Safe:
+                if (safe)
+                    return;
+                
+                safe = true;
+                lastSafe = Time.time;
+                Debug.Log("player safe");
                 break;
             default:
                 Debug.Log("no effect implemented");
@@ -125,9 +136,18 @@ public class Player : MonoBehaviour
             {
                 velocity /= speedBoostValue;
                 activateSpeed = false;
-                
             }
         }
+
+        if (safe)
+        {
+            if (Time.time - lastSafe > safeDuration)
+            {
+                Debug.Log("player unsafe");
+                safe = false;
+            }
+        }
+        
     }
 }
 

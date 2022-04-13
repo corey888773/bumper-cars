@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BumperCars;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,8 +17,9 @@ public class GameManager : MonoBehaviour
     }
 
     //some variables
-    public float firstHolesSpawn = 3f;
-    
+    public List<float> holesSpawnTime;
+    public int round = 0;
+   
     //references to game objects
     public List<Player> players;
     public List<Hole> holes;
@@ -27,14 +29,33 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > firstHolesSpawn)
-            holeManager.SpawnHoles();
-            boostManager.SpawnBoost();
+        //first round
+        Round();
+
     }
 
     //floating text method
-    public void ShowText(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    public void ShowText(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration, TextTypes textType, string endOfTimeMassage = "")
     {
-        textManager.Show(message, fontSize, color, position, motion, duration);
+        textManager.Show(message, fontSize, color, position, motion, duration, textType, endOfTimeMassage);
+    }
+
+    private void Round()
+    {
+        if (Time.time > holesSpawnTime[0])
+        {
+            holeManager.SpawnHoles();
+            boostManager.SpawnBoost();
+        }
+        if (Time.time > holesSpawnTime[0] + 10f)
+        {
+            for (var i = 0; i < players.Count; i++)
+            {
+                if (players[i].safe) continue;
+                Destroy(players[i].gameObject);
+                ShowText("looser", 45,Color.red, players[i].transform.position, Vector3.up * Time.deltaTime, 2f, TextTypes.Text);
+                players.RemoveAt(i);
+            }
+        }
     }
 }

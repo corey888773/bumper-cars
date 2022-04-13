@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using BumperCars;
 using UnityEngine;
 
 public class Hole : MonoBehaviour
@@ -13,6 +14,10 @@ public class Hole : MonoBehaviour
     private HoleManager _holeManager; 
     private Collider2D _checkCollider;
     private SpriteRenderer _spriteRenderer;
+    private float countDown;
+    public float duration = 5f;
+    private bool savingEnabled = true;
+    
     public static float red;
     public static float green;
     public static float blue;
@@ -42,6 +47,13 @@ public class Hole : MonoBehaviour
         // confirm hole after 1 second of existence
         if (Time.time - spawnTime > 1f && !confirmed)
             ConfirmHole();
+
+        // destroy hole after couple seconds
+        if (confirmed && Time.time - countDown > duration)
+        {
+            Destroy(gameObject);
+        }
+        
     }
     
     //function to confirm hole existence. changes layer to prevent Player erasing this objects and enables sprite
@@ -50,16 +62,26 @@ public class Hole : MonoBehaviour
         {
             gameObject.layer = 7;
             _spriteRenderer.enabled = true;
+            GameManager.instance.ShowText("", 50,
+                new Color(red, green, blue), transform.position, Vector3.zero, duration, TextTypes.Timer, "BOOM");
+            countDown = Time.time;
             confirmed = true;
-            GameManager.instance.ShowText(_holeManager.holeCount.ToString(),50,
-                new Color(red, green, blue), transform.position, Vector3.up * Time.deltaTime, 1f);
+            
         } 
     }
+
+    
+    
     
     //function which activates when stepping on object. Requires collider to be set on Trigger Mode
     private void OnTriggerStay2D(Collider2D collision)
     {
         collision.SendMessage("AddEffect",EffectType.Hole);
+        if (confirmed && Time.time - countDown > duration - 1 && savingEnabled)
+        {
+            collision.SendMessage( "AddEffect", EffectType.Safe);
+            savingEnabled = false;
+        }
         
     }
     

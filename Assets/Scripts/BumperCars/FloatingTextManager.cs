@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BumperCars;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class FloatingTextManager : MonoBehaviour
     }
 
     // show the floating text
-    public void Show(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    public void Show(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration, TextTypes textType, string endOfTimeMessage = "")
     {
         FloatingText floatingText = GetFloatingText();
 
@@ -30,6 +31,8 @@ public class FloatingTextManager : MonoBehaviour
         floatingText.gameObject.transform.position = Camera.main.WorldToScreenPoint(position);
         floatingText.motion = motion;
         floatingText.duration = duration;
+        floatingText.type = textType;
+        floatingText.endOfTimeMessage = endOfTimeMessage;
         
         floatingText.Show();
 

@@ -46,7 +46,7 @@ public class HoleManager : MonoBehaviour
         if (countDelta <= 0)
         {
             GenerateRandomSpot();
-            countDelta = 3f;
+            countDelta = 1f;
         }
     }
 }

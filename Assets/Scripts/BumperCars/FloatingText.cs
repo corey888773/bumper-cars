@@ -1,3 +1,7 @@
+using System.Timers;
+using BumperCars;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +12,12 @@ public class FloatingText
     public Text txt;
     public Vector3 motion;
     public float duration;
-    public float lastShown;
+    public TextTypes type;
+    public string endOfTimeMessage;
 
     public void Show()
     {
         active = true;
-        lastShown = Time.time;
         gameObject.SetActive(active);
     }
 
@@ -25,19 +29,37 @@ public class FloatingText
 
     public void UpdateFloatingText()
     {
-        if (!active)
-            return;
-        
-        // if (Time.time - lastShown > duration) Hole.green += 0.4f / 255f;
-        //
-        // foreach (var floatingText in FloatingTextManager.floatingTexts)
-        // {
-        //     if (Hole.green <= 1)
-        //         floatingText.txt.color = new Color(Hole.red, Hole.green, Hole.blue);
-        //     else
-        //         floatingText.txt.text = "Active";
-        // }
+        switch (type)
+        {
+            case TextTypes.Text:
+            
+                if (!active)
+                    return;
+                
+                gameObject.transform.position += motion * Time.deltaTime;
+                duration -= Time.deltaTime;
+               
+                if (duration < 0)
+                    Hide();
+                break;
+            
+            case TextTypes.Timer:
+                if (!active)
+                    return;
+                
+                duration -= Time.deltaTime;
+                txt.text = duration.ToString("0.0");
 
-        gameObject.transform.position += motion * Time.deltaTime;
+                if (duration < 0)
+                {
+                    txt.text = endOfTimeMessage;
+                    txt.color = Color.red;
+                    if(duration < -1)
+                        Hide();
+                }
+                break;
+
+        }
+        
     }
 }
