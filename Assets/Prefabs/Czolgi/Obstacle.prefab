@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6353563303997647982}
   - component: {fileID: 6353563303997647983}
   - component: {fileID: -6570992669771811272}
+  - component: {fileID: -7292493070940867934}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
@@ -111,3 +112,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7292493070940867934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353563303997647969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214de26b405eb2e43b6570d0d9a7a7dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 2
