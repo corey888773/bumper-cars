@@ -8,8 +8,9 @@ public class MysteryBoost : Boost
 {
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("PlayerUnsafe") || !collision.CompareTag("PlayerSafe"))
+        if (!collision.CompareTag("PlayerUnsafe") && !collision.CompareTag("PlayerSafe"))
             return;
+        
         if (!Player.BoostPicked)
         {
             boostPicker = UnityEngine.Random.Range(0, 4);
@@ -26,6 +27,7 @@ public class MysteryBoost : Boost
                     break;
                 case 3:
                     collision.SendMessage("AddEffect",EffectType.Inverse);
+                    break;
             }
             Destroy(gameObject);
             BoostManagerv2.boostCount -= 1;

@@ -7,7 +7,7 @@ public class MassBoost : Boost
 {
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("PlayerUnsafe") || !collision.CompareTag("PlayerSafe"))
+        if (!collision.CompareTag("PlayerUnsafe") && !collision.CompareTag("PlayerSafe"))
             return;
         if (!Player.BoostPicked)
         {
