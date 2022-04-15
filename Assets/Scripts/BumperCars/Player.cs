@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     protected bool activateMass;
     protected float massActivateTime;
     
+    protected bool activateInverse;
+    protected float inverseActivateTime;
+    
     protected bool activateFreeze;
     protected float freezeActivateTime;
     
@@ -36,7 +39,7 @@ public class Player : MonoBehaviour
     
     public joystickScript _joystick;
     public float rotationSpeed = 720.0f;
-    public static float velocity = 10.0f;
+    public static float velocity = 7.0f;
     public static float StartingVelocity;
     public static float StartingMass;
     
@@ -109,6 +112,7 @@ public class Player : MonoBehaviour
                 {
                     speedActivateTime = Time.time;
                     activateSpeed = true;
+                    BoostPicked = true;
                     if (activateSpeed)
                     {
                         velocity *= BoostValue;
@@ -120,6 +124,7 @@ public class Player : MonoBehaviour
                 {
                     massActivateTime = Time.time;
                     activateMass = true;
+                    BoostPicked = true;
                     if (activateMass)
                     {
                         _rigidbody2D.mass *= BoostValue;
@@ -130,11 +135,21 @@ public class Player : MonoBehaviour
             case EffectType.Freeze:
                 freezeActivateTime = Time.time;
                 activateFreeze = true;
+                BoostPicked = true;
                 if (activateFreeze)
                 {
                     _rigidbody2D.velocity /= float.MaxValue;
                     _rigidbody2D.angularDrag = 0;
                     _rigidbody2D.mass = float.MaxValue;
+                }
+                break;
+            case EffectType.Inverse:
+                inverseActivateTime = Time.time;
+                activateInverse = true;
+                BoostPicked = true;
+                if (activateInverse)
+                {
+                    
                 }
                 break;
             case EffectType.Safe:
@@ -152,14 +167,12 @@ public class Player : MonoBehaviour
     
     protected virtual void FixedUpdate()
     {
-        Vector2 input = _joystick.getValue() * velocity;
-        float y = Input.GetAxisRaw("Vertical");
-        float x = Input.GetAxisRaw("Horizontal");
-        Move(new Vector2(input.x, input.y));
+        if (!activateInverse)
+        {
+            Vector2 input = _joystick.getValue() * velocity;
+            Move(new Vector2(input.x, input.y));
+        }
         CheckForObjectsCollisions();
-
-        if (activateSpeed || activateMass || activateFreeze) BoostPicked = true;
-        else BoostPicked = false;
 
         if (activateSpeed)
         {
@@ -167,6 +180,7 @@ public class Player : MonoBehaviour
             {
                 velocity /= BoostValue;
                 activateSpeed = false;
+                BoostPicked = false;
             }
         }
 
@@ -177,6 +191,7 @@ public class Player : MonoBehaviour
                 _rigidbody2D.mass /= BoostValue;
                 velocity /= BoostValue;
                 activateMass = false;
+                BoostPicked = false;
             }
         }
         
@@ -187,7 +202,19 @@ public class Player : MonoBehaviour
                 _rigidbody2D.mass = StartingMass;
                 velocity = StartingVelocity;
                 activateFreeze = false;
+                BoostPicked = false;
             }
+        }
+        
+        if (activateInverse)
+        {
+            Vector2 input = _joystick.getValue() * velocity;
+            Move(new Vector2(input.x * -1, input.y * -1));
+            if (Time.time - inverseActivateTime > Duration)
+            {
+                activateInverse = false;
+                BoostPicked = false;
+            }   
         }
 
     }

@@ -6,6 +6,7 @@ public enum EffectType
         Hole,
         Speed,
         Freeze,
+        Inverse,
         Mass,
         Safe
     }

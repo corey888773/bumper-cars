@@ -41,8 +41,8 @@ public class BoostManagerv2 : MonoBehaviour
     //spawn holes in previously generated position
     private void InstantiateBoost(Vector3 position)
     {
-        var boostPicker = Random.Range(0, 4);
-        Instantiate(boostPrefab[boostPicker], position, Quaternion.identity);
+        var boostPicker = Random.Range(0, 3);
+        Instantiate(boostPrefab[1], position, Quaternion.identity);
         boostCount++;
     }
 

@@ -12,7 +12,7 @@ public class MysteryBoost : Boost
             return;
         if (!Player.BoostPicked)
         {
-            boostPicker = UnityEngine.Random.Range(0, 3);
+            boostPicker = UnityEngine.Random.Range(0, 4);
             switch (boostPicker)
             {
                 case 0:
@@ -24,6 +24,8 @@ public class MysteryBoost : Boost
                 case 2:
                     collision.SendMessage("AddEffect", EffectType.Speed);
                     break;
+                case 3:
+                    collision.SendMessage("AddEffect",EffectType.Inverse);
             }
             Destroy(gameObject);
             BoostManagerv2.boostCount -= 1;
