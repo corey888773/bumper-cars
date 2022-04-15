@@ -138,12 +138,9 @@ public class Player : MonoBehaviour
                 }
                 break;
             case EffectType.Safe:
-                if (safe)
-                    return;
-                
                 safe = true;
-                lastSafe = Time.time;
-                Debug.Log("player safe");
+                gameObject.tag = "PlayerSafe";
+                
                 break;
             default:
                 Debug.Log("no effect implemented");
@@ -193,15 +190,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (safe)
-        {
-            if (Time.time - lastSafe > safeDuration)
-            {
-                Debug.Log("player unsafe");
-                safe = false;
-            }
-        }
-        
     }
 }
 

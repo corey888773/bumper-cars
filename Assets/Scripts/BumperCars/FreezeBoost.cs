@@ -6,11 +6,13 @@ using Random = System.Random;
 
 public class FreezeBoost : Boost
 {
-    protected override void OnTriggerEnter2D(Collider2D colision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!collision.CompareTag("PlayerUnsafe") || !collision.CompareTag("PlayerSafe"))
+            return;
         if (!Player.BoostPicked)
         {
-            colision.SendMessage("AddEffect", EffectType.Freeze);
+            collision.SendMessage("AddEffect", EffectType.Freeze);
             Destroy(gameObject);
             BoostManagerv2.boostCount -= 1;
         }

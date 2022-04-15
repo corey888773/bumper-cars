@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class SpeedBoost : Boost
 {
-    protected override void OnTriggerEnter2D(Collider2D colision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!collision.CompareTag("PlayerUnsafe") || !collision.CompareTag("PlayerSafe"))
+            return;
         if (!Player.BoostPicked)
         {
-            colision.SendMessage("AddEffect", EffectType.Speed);
+            collision.SendMessage("AddEffect", EffectType.Speed);
             Destroy(gameObject);
             BoostManagerv2.boostCount -= 1;
         }

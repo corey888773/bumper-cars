@@ -362,6 +362,10 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 779366878}
+    - target: {fileID: 7882847067988969086, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
+      propertyPath: filterMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_Name
       value: ComputerPlayer (2)
@@ -369,6 +373,10 @@ PrefabInstance:
     - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
+      propertyPath: m_TagString
+      value: PlayerUnsafe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
@@ -489,6 +497,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &387982510 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7882847067988969086, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
+  m_PrefabInstance: {fileID: 7882847069186864651}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfa5c03e2a843b9a84057ce548e70d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &474425296
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,16 +537,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365b2367015ac7b429a858e19bc1ddbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holesSpawnTime:
-  - 3
-  - 20
-  - 37
-  round: 0
   players:
   - {fileID: 7860947259162608182}
-  - {fileID: 966166702}
+  - {fileID: 387982510}
   - {fileID: 246725160}
-  - {fileID: 980992738}
   holes: []
   holeManager: {fileID: 1433577120}
   textManager: {fileID: 144278115}
@@ -558,6 +571,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -583,7 +597,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.45723566, g: 0.554579, b: 0.7075472, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -631,6 +645,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &519420033
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!114 &779366878 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5550543251879381097, guid: 87da42dc565b2081db2a2ac3594a3b5e, type: 3}
@@ -657,28 +723,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66133b511e48dc79b83fc92c16988530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &966166702 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7882847067988969086, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
-  m_PrefabInstance: {fileID: 7882847069186864651}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cfa5c03e2a843b9a84057ce548e70d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &980992738 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7882847067988969086, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
-  m_PrefabInstance: {fileID: 228509015}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cfa5c03e2a843b9a84057ce548e70d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1433577119
@@ -713,6 +757,7 @@ MonoBehaviour:
   holePrefab: {fileID: 4643769476317041112, guid: 2e6f20bc03d05190681f7e3e1e52907d, type: 3}
   countDelta: 0
   holeCount: 0
+  confirmedHoleCount: 0
   maxHoleAmount: 3
 --- !u!4 &1433577121
 Transform:
@@ -2943,7 +2988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969074, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.2053666
+      value: -7.205367
       objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969074, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2989,13 +3034,21 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 779366878}
+    - target: {fileID: 7882847067988969086, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
+      propertyPath: filterMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_Name
       value: ComputerPlayer (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
+      propertyPath: m_TagString
+      value: PlayerUnsafe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
@@ -3130,7 +3183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7860947259319914080, guid: 936eb3ad47154b44194c886df7f6afeb, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: PlayerUnsafe
       objectReference: {fileID: 0}
     - target: {fileID: 7860947259319914083, guid: 936eb3ad47154b44194c886df7f6afeb, type: 3}
       propertyPath: _joystick
@@ -3284,13 +3337,21 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 779366878}
+    - target: {fileID: 7882847067988969086, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
+      propertyPath: filterMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_Name
       value: ComputerPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882847067988969087, guid: 180d5096be90c4c0f96248a90c786725, type: 3}
+      propertyPath: m_TagString
+      value: PlayerUnsafe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 180d5096be90c4c0f96248a90c786725, type: 3}

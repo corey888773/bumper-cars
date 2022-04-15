@@ -7,10 +7,11 @@ public class HoleManager : MonoBehaviour
     public GameObject holePrefab;
     public float countDelta;
     public int holeCount;
-    public int maxHoleAmount = 4;
+    public int confirmedHoleCount;
+    public int maxHoleAmount;
     void Update()
     {
-        
+        maxHoleAmount = GameManager.instance.players.Count - 1;
     }
     public void GenerateRandomSpot()
     {
@@ -39,7 +40,7 @@ public class HoleManager : MonoBehaviour
         holeCount++;
     }
 
-    public void SpawnHoles()
+    public bool SpawnHoles()
     {
         // spawning delay
         countDelta -= Time.deltaTime; 
@@ -48,6 +49,7 @@ public class HoleManager : MonoBehaviour
             GenerateRandomSpot();
             countDelta = 1f;
         }
+        return maxHoleAmount == confirmedHoleCount;
     }
 }
 

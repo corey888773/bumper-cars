@@ -11,6 +11,7 @@ public class Hole : MonoBehaviour
     public LayerMask filterMask;
     private float spawnTime;
     private bool confirmed;
+    private float saveTime;
     private HoleManager _holeManager; 
     private Collider2D _checkCollider;
     private SpriteRenderer _spriteRenderer;
@@ -44,13 +45,15 @@ public class Hole : MonoBehaviour
         // confirm hole after 1 second of existence
         if (Time.time - spawnTime > 1f && !confirmed)
             ConfirmHole();
-
-        // destroy hole after couple seconds
-        if (confirmed && Time.time - countDown > duration)
+        
+        // 
+        if (Time.time - saveTime > 1 && !savingEnabled)
         {
             Destroy(gameObject);
+            _holeManager.holeCount--;
+            _holeManager.confirmedHoleCount--;
         }
-        
+
     }
     
     //function to confirm hole existence. changes layer to prevent Player erasing this objects and enables sprite
@@ -59,6 +62,7 @@ public class Hole : MonoBehaviour
         {
             gameObject.layer = 7;
             _spriteRenderer.enabled = true;
+            _holeManager.confirmedHoleCount++;
             GameManager.instance.ShowText("", 50,Color.black, transform.position, Vector3.zero, duration, TextTypes.Timer, "BOOM");
             countDown = Time.time;
             confirmed = true;
@@ -73,10 +77,14 @@ public class Hole : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         collision.SendMessage("AddEffect",EffectType.Hole);
-        if (confirmed && Time.time - countDown > duration - 1 && savingEnabled)
+        if (confirmed && Time.time - countDown > duration && savingEnabled)
         {
-            collision.SendMessage( "AddEffect", EffectType.Safe);
-            savingEnabled = false;
+
+            if(collision.CompareTag("PlayerUnsafe")){
+                collision.SendMessage("AddEffect", EffectType.Safe);
+                savingEnabled = false;
+                saveTime = Time.time;
+            }
         }
         
     }
