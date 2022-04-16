@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace Czolgi {
     public class Shooting : MonoBehaviour {
+        [SerializeField] private Transform bulletsParent;
+
         public float bulletSpeed;
         public Transform shootPos;
         public Transform turret;
@@ -31,7 +33,7 @@ namespace Czolgi {
 
         void Shoot() {
             Quaternion rotation = turret.rotation;
-            GameObject newBullet = Instantiate(bullet, shootPos.position, rotation);
+            GameObject newBullet = Instantiate(bullet, shootPos.position, rotation, bulletsParent);
             Rigidbody2D rigidb = newBullet.GetComponent<Rigidbody2D>();
             Vector3 direction = turret.up;
             rigidb.velocity = direction * bulletSpeed;
