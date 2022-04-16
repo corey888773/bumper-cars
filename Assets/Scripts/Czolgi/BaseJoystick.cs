@@ -9,14 +9,14 @@ namespace Czolgi {
         [SerializeField] protected Transform _pad, _border;
         [SerializeField] protected float _speed;
 
-        private Camera _camera;
+        protected Camera _camera;
         private Resolution _res;
 
         private Vector3 _padStartPosition, _screenPoint, _newPosition;
         private Vector2 _joystickPos;
         private Touch _closestTouch;
 
-        private float _maxTouchDifferene;
+        protected float _joystickRadiusInPixels;
         private float _joystickRadius;
 
         protected void Start() {
@@ -29,12 +29,13 @@ namespace Czolgi {
 
         protected void Update() {
             if (Application.platform == RuntimePlatform.WindowsEditor)
-                CheckResolution();
+                if (_res.width != Screen.width || _res.height != Screen.height)
+                    OnResolutionChange();
 
             if (Input.touchCount > 0) {
                 _closestTouch = GetClosestTouch();
 
-                if (_closestTouch.phase == TouchPhase.Moved && Vector2.Distance(_joystickPos, _closestTouch.position) < _maxTouchDifferene * 2) {
+                if (_closestTouch.phase == TouchPhase.Moved && Vector2.Distance(_joystickPos, _closestTouch.position) < _joystickRadiusInPixels * 1.5) {
                     SetHorizontalAndVertical(_closestTouch.position, _joystickPos);
                     _newPosition = _padStartPosition + new Vector3(_joystickRadius * _horizontal, _joystickRadius * _vertical, 0).normalized;
                 }
@@ -46,22 +47,19 @@ namespace Czolgi {
             _pad.localPosition = Vector3.Lerp(_pad.localPosition, _newPosition, _speed * Time.deltaTime);
         }
 
-        private void CheckResolution() {
-            if (_res.width != Screen.width || _res.height != Screen.height) {
-                Debug.Log(_camera);
-                _screenPoint = _camera.WorldToScreenPoint(transform.position);
-                UpdateResolution();
-            }
+        private void OnResolutionChange() {
+            _screenPoint = _camera.WorldToScreenPoint(transform.position);
+            UpdateResolution();
         }
 
         private void SetHorizontalAndVertical(Vector2 touchPos, Vector2 screenJoysticPos) {
             var xDifference = touchPos.x - screenJoysticPos.x;
-            _horizontal = xDifference / _maxTouchDifferene;
+            _horizontal = xDifference / _joystickRadiusInPixels;
             if (_horizontal > 1) _horizontal = 1;
             if (_horizontal < -1) _horizontal = -1;
 
             var yDifference = _closestTouch.position.y - _screenPoint.y;
-            _vertical = yDifference / _maxTouchDifferene;
+            _vertical = yDifference / _joystickRadiusInPixels;
             if (_vertical > 1) _vertical = 1;
             if (_vertical < -1) _vertical = -1;
         }
@@ -69,7 +67,7 @@ namespace Czolgi {
         private void UpdateResolution() {
             _res = Screen.currentResolution;
             _screenPoint = _camera.WorldToScreenPoint(transform.position);
-            _maxTouchDifferene = _camera.WorldToScreenPoint(transform.position + new Vector3(_joystickRadius, 0, 0)).x - _screenPoint.x;
+            _joystickRadiusInPixels = _camera.WorldToScreenPoint(transform.position + new Vector3(_joystickRadius, 0, 0)).x - _screenPoint.x;
         }
 
         private Touch GetClosestTouch() {
