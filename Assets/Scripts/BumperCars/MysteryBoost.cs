@@ -8,8 +8,7 @@ public class MysteryBoost : Boost
 {
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("PlayerUnsafe") && !collision.CompareTag("PlayerSafe"))
-            return;
+        base.OnTriggerEnter2D(collision);
         
         if (!Player.BoostPicked)
         {

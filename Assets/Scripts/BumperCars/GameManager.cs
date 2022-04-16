@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
         }
         //first round
         Round();
-
     }
 
     //floating text method
@@ -68,7 +67,6 @@ public class GameManager : MonoBehaviour
         {
             if (players[i].safe)
             {
-                players[i].tag = "PlayerUnsafe";
                 players[i].safe = false;
                 continue;
             }

@@ -34,9 +34,7 @@ public class Player : MonoBehaviour
     
     //safeState
     public bool safe;
-    protected float safeDuration = 10f;
-    protected float lastSafe;
-    
+
     public joystickScript _joystick;
     public float rotationSpeed = 720.0f;
     public static float velocity = 7.0f;
@@ -154,8 +152,7 @@ public class Player : MonoBehaviour
                 break;
             case EffectType.Safe:
                 safe = true;
-                gameObject.tag = "PlayerSafe";
-                
+
                 break;
             default:
                 Debug.Log("no effect implemented");
@@ -216,7 +213,6 @@ public class Player : MonoBehaviour
                 BoostPicked = false;
             }   
         }
-
     }
 }
 

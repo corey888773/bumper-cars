@@ -22,7 +22,7 @@ public class Boost : MonoBehaviour
     
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("effect not implemented");
+        if (!collision.CompareTag("Player")) return;
     }
 
     protected void update()

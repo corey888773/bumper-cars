@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using BumperCars;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class Hole : MonoBehaviour
     private float countDown;
     public float duration = 5f;
     private bool savingEnabled = true;
-    
+
 
 
     void Awake()
@@ -79,8 +80,8 @@ public class Hole : MonoBehaviour
         collision.SendMessage("AddEffect",EffectType.Hole);
         if (confirmed && Time.time - countDown > duration && savingEnabled)
         {
-
-            if(collision.CompareTag("PlayerUnsafe")){
+            foreach (var player in GameManager.instance.players.Where(player => player._boxCollider2D == collision && !player.safe))
+            {
                 collision.SendMessage("AddEffect", EffectType.Safe);
                 savingEnabled = false;
                 saveTime = Time.time;
