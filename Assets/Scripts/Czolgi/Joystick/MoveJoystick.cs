@@ -13,6 +13,8 @@ namespace Czolgi {
             base.Start();
             transform.position = _camera.ScreenToWorldPoint(new Vector3(Screen.safeArea.xMin + _joystickRadiusInPixels + _padding, _joystickRadiusInPixels + _padding, 0));
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            _joystickPos = _camera.WorldToScreenPoint(transform.position);
+
         }
 
         private new void Update() {

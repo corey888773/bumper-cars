@@ -13,7 +13,7 @@ namespace Czolgi {
         private Resolution _res;
 
         private Vector3 _padStartPosition, _screenPoint, _newPosition;
-        private Vector2 _joystickPos;
+        protected Vector2 _joystickPos;
         private Touch _closestTouch;
 
         protected float _joystickRadiusInPixels;
@@ -37,11 +37,13 @@ namespace Czolgi {
 
                 if (_closestTouch.phase == TouchPhase.Moved && Vector2.Distance(_joystickPos, _closestTouch.position) < _joystickRadiusInPixels * 1.5) {
                     SetHorizontalAndVertical(_closestTouch.position, _joystickPos);
-                    _newPosition = _padStartPosition + new Vector3(_joystickRadius * _horizontal, _joystickRadius * _vertical, 0).normalized;
+                    _newPosition = _padStartPosition + new Vector3(_joystickRadius * _horizontal, _joystickRadius * _vertical, 0);
+                    if (Mathf.Abs(_newPosition.x) + Mathf.Abs(_newPosition.y) > 1)
+                        _newPosition = _newPosition.normalized;
                 }
                 if (_closestTouch.phase == TouchPhase.Ended) {
                     (_vertical, _horizontal) = (0, 0);
-                    _newPosition = _padStartPosition + new Vector3(_joystickRadius * _horizontal, _joystickRadius * _vertical, 0).normalized;
+                    _newPosition = _padStartPosition;
                 }
             }
             _pad.localPosition = Vector3.Lerp(_pad.localPosition, _newPosition, _speed * Time.deltaTime);
