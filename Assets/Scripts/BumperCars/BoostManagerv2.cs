@@ -38,7 +38,7 @@ public class BoostManagerv2 : MonoBehaviour
     }
    
     
-    //spawn holes in previously generated position
+    //spawn boosts in previously generated position
     private void InstantiateBoost(Vector3 position)
     {
         var boostPicker = Random.Range(0, 3);

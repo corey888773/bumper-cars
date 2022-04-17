@@ -78,6 +78,7 @@ public class Hole : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         collision.SendMessage("AddEffect",EffectType.Hole);
+        
         if (confirmed && Time.time - countDown > duration && savingEnabled)
         {
             foreach (var player in GameManager.instance.players.Where(player => player._boxCollider2D == collision && !player.safe))

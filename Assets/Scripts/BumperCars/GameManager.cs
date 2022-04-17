@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    // this is the game manager, the place where we have references to every ManagerObject in this game. It gives us an option to not make reference in every other object
+    //this is the game manager, the place where we have references to every ManagerObject in this game. It gives us an option to not make reference in every other object
     //simply using reference to GameManager and then to specific objects. It works like a Boss who gives orders to employee 
 
     private void Awake()
@@ -33,14 +33,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        lastRound = Time.time;
+        lastRound = -3f;
     }
     private void Update()
     {
         boostManager.SpawnBoost();
         
         lastRound += Time.deltaTime;
-        if (lastRound > 3f && !round)
+        if (lastRound > 0f && !round)
         {
             round =  holeManager.SpawnHoles();
             start = true;
@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
         if(!round) return;
         if (holeManager.holeCount != 0 || !start) return;
         
+        //for every player, check if he's safe, and if not Destroy him.
         for (var i = 0; i < players.Count; i++)
         {
             if (players[i].safe)
@@ -77,7 +78,8 @@ public class GameManager : MonoBehaviour
         }
         start = false;
         round = false;
-        lastRound = -6f;
+        // sets the delay between rounds
+        lastRound = -9f;
     }
 }
 
