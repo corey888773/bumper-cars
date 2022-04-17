@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6353563303997647982}
   - component: {fileID: 6353563303997647983}
   - component: {fileID: -6570992669771811272}
-  - component: {fileID: -7292493070940867934}
+  - component: {fileID: -6014579606957453041}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-7292493070940867934
+--- !u!114 &-6014579606957453041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
