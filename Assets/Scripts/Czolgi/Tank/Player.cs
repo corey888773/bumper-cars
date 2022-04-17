@@ -5,20 +5,26 @@ using UnityEngine;
 namespace Czolgi {
 
     public class Player : MonoBehaviour {
-        [SerializeField] private float speed = 10;
-        private Rigidbody2D rgb;
-        private Quaternion _rotation = new Quaternion(0, 0, 0, 0);
+        [SerializeField] private float _speed = 3;
+
+        private Rigidbody2D _rgb;
+        private Animator _animator;
+        private Quaternion _rotation = Quaternion.identity;
+
         void Start() {
-            rgb = GetComponent<Rigidbody2D>();
+            _rgb = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
         }
 
         private void FixedUpdate() {
             if (MoveJoystick.direction != Vector2.zero) {
-                rgb.velocity = MoveJoystick.direction * speed;
-                _rotation = Quaternion.LookRotation(Vector3.forward, rgb.velocity);
+                _rgb.velocity = MoveJoystick.direction * _speed;
+                _rotation = Quaternion.LookRotation(Vector3.forward, _rgb.velocity);
+                _animator.enabled = true;
 
             } else {
-                rgb.velocity = Vector2.zero;
+                _rgb.velocity = Vector2.zero;
+                _animator.enabled = false;
             }
             transform.rotation = _rotation;
         }

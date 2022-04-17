@@ -2768,6 +2768,7 @@ GameObject:
   - component: {fileID: 1013843548}
   - component: {fileID: 1013843547}
   - component: {fileID: 1013843550}
+  - component: {fileID: 1013843551}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2855,7 +2856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a946815b61cb6498552d81112abc5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  _speed: 3
 --- !u!50 &1013843548
 Rigidbody2D:
   serializedVersion: 4
@@ -2876,7 +2877,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1013843549
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2887,7 +2888,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2901,7 +2902,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.76160026, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &1013843550
 MonoBehaviour:
@@ -2922,6 +2923,26 @@ MonoBehaviour:
   bullet: {fileID: 8158446785461114037, guid: c6ed97f9ead4f9746a96c8e216c79319, type: 3}
   clicksDelay: 0.5
   shootingDelay: 1
+--- !u!95 &1013843551
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013843544}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c74b355242f9e445806632a6b998e44, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1048003213
 GameObject:
   m_ObjectHideFlags: 0
@@ -3615,6 +3636,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 657058749}
     m_Modifications:
+    - target: {fileID: -6570992669771811272, guid: 28c4e2093d1726c7d99215ef73d248f6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6353563303997647969, guid: 28c4e2093d1726c7d99215ef73d248f6, type: 3}
       propertyPath: m_Name
       value: Obstacle
