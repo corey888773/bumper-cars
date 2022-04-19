@@ -26,6 +26,7 @@ namespace Czolgi {
             if (other.gameObject.tag != "Player") {
                 _animator.SetTrigger("explosion");
                 _rgb.velocity = Vector2.zero;
+                Events.OnExplosionApper.Invoke();
             }
         }
 
