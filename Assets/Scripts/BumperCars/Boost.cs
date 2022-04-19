@@ -18,6 +18,7 @@ public class Boost : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         // _spriteRenderer.enabled = false;
         spawnTime = Time.time;
+        _boostManager.boosts.Add(this);
     }
     
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -39,6 +40,11 @@ public class Boost : MonoBehaviour
             confirmed = true;
             
         } 
+    }
+
+    ~Boost()
+    {
+        _boostManager.boosts.Remove(this);
     }
 }
 

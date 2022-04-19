@@ -31,6 +31,8 @@ public class Hole : MonoBehaviour
         
         // note time of object spawn
         spawnTime = Time.time;
+        
+        
     }
     void Update()
     {
@@ -66,11 +68,16 @@ public class Hole : MonoBehaviour
             _holeManager.confirmedHoleCount++;
             GameManager.instance.ShowText("", 50,Color.black, transform.position, Vector3.zero, duration, TextTypes.Timer, "BOOM");
             countDown = Time.time;
+            _holeManager.holes.Add(this);
             confirmed = true;
             
         } 
     }
 
+    ~Hole()
+    {
+        _holeManager.holes.Remove(this);
+    }
     
     
     

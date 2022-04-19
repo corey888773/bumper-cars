@@ -5,6 +5,7 @@ using UnityEngine;
 public class HoleManager : MonoBehaviour
 {
     public GameObject holePrefab;
+    public List<Hole> holes;
     public float countDelta;
     public int holeCount;
     public int confirmedHoleCount;

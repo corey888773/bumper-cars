@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BoostManagerv2 : MonoBehaviour
 {
     public List<GameObject> boostPrefab;
+    public List<Boost> boosts;
     public float Count;
     public static int boostCount;
     public int maxBoostAmount = 2;
@@ -42,7 +44,8 @@ public class BoostManagerv2 : MonoBehaviour
     private void InstantiateBoost(Vector3 position)
     {
         var boostPicker = Random.Range(0, 3);
-        Instantiate(boostPrefab[1], position, Quaternion.identity);
+        var boost = boostPrefab[boostPicker];
+        Instantiate(boost, position, Quaternion.identity);
         boostCount++;
     }
 

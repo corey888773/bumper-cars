@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
 
     //references to game objects
     public List<Player> players;
-    public List<Hole> holes;
     public HoleManager holeManager;
     public FloatingTextManager textManager;
     public BoostManagerv2 boostManager;
