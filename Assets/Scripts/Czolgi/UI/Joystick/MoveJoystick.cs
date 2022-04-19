@@ -24,6 +24,7 @@ namespace Czolgi {
 
         private void UpdateJoystickDirection() {
             direction = new Vector2(_horizontal, _vertical).normalized;
+            Vector2.Dot(direction, Vector2.right);
         }
     }
 }
