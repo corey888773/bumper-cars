@@ -6,31 +6,25 @@ using Random = System.Random;
 
 public class MysteryBoost : Boost
 {
-    protected override void OnTriggerEnter2D(Collider2D collision)
+    protected override void Awake()
     {
-        base.OnTriggerEnter2D(collision);
-        
-        if (!Player.BoostPicked)
+        base.Awake();
+        _effectType = EffectType.Freeze;
+        boostPicker = UnityEngine.Random.Range(0, 4);
+        switch (boostPicker)
         {
-            boostPicker = UnityEngine.Random.Range(0, 4);
-            switch (boostPicker)
-            {
-                case 0:
-                    collision.SendMessage("AddEffect", EffectType.Freeze);
-                    break;
-                case 1:
-                    collision.SendMessage("AddEffect", EffectType.Mass);
-                    break;
-                case 2:
-                    collision.SendMessage("AddEffect", EffectType.Speed);
-                    break;
-                case 3:
-                    collision.SendMessage("AddEffect",EffectType.Inverse);
-                    break;
-            }
-            Destroy(gameObject);
-            BoostManagerv2.boostCount -= 1;
+            case 0:
+                _effectType = EffectType.Freeze;
+                break;
+            case 1:
+                _effectType = EffectType.Mass;
+                break;
+            case 2:
+                _effectType = EffectType.Speed;
+                break;
+            case 3:
+                _effectType = EffectType.Inverse;
+                break;
         }
-        
     }
 }

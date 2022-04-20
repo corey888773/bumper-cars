@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Boost : MonoBehaviour
@@ -11,8 +12,9 @@ public class Boost : MonoBehaviour
     private Collider2D _checkCollider;
     private SpriteRenderer _spriteRenderer;
     protected int boostPicker;
+    protected EffectType _effectType = EffectType.Speed;
 
-    void Awake()
+    protected virtual void Awake()
     {
         _boostManager = FindObjectOfType<BoostManagerv2>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -23,6 +25,12 @@ public class Boost : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
+        foreach (var player in GameManager.instance.players.Where(player => player._boxCollider2D == collision && !player.BoostPicked))
+        {
+            collision.SendMessage("AddEffect", _effectType);
+            Destroy(gameObject);
+            BoostManagerv2.boostCount -= 1;
+        }
     }
 
     protected void update()

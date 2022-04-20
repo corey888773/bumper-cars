@@ -6,15 +6,9 @@ using Random = System.Random;
 
 public class FreezeBoost : Boost
 {
-    protected override void OnTriggerEnter2D(Collider2D collision)
+    protected override void Awake()
     {
-        base.OnTriggerEnter2D(collision);
-
-        if (!Player.BoostPicked)
-        {
-            collision.SendMessage("AddEffect", EffectType.Freeze);
-            Destroy(gameObject);
-            BoostManagerv2.boostCount -= 1;
-        }
+        base.Awake();
+        _effectType = EffectType.Freeze;
     }
 }
