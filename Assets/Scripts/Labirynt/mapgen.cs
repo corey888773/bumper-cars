@@ -213,7 +213,7 @@ public class mapgen : MonoBehaviour
         //SCALING
         cam_ = GameObject.Find("Main Camera").GetComponent<Camera>();
         twoExitTiles = GameObject.Find("twoExitTiles");
-        Vector2 screenSize = cam_.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        Vector2 screenSize = cam_.ScreenToWorldPoint(new Vector2(Screen.safeArea.width, Screen.safeArea.height));
 
         float screenRatio = screenSize.y / screenSize.x;
         float labyrinthRatio = labyrinthHeight / labyrinthWidth;
