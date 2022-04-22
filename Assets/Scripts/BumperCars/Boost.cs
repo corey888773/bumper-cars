@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boost : MonoBehaviour
+public abstract class Boost : MonoBehaviour
 {
     private float spawnTime;
     private bool confirmed;
@@ -26,7 +26,7 @@ public class Boost : MonoBehaviour
         if (!collision.CompareTag("Player")) return;
     }
 
-    protected void update()
+    protected void Update()
     {
         // confirm hole after 1 second of existence
         if (Time.time - spawnTime > 1f && !confirmed)
