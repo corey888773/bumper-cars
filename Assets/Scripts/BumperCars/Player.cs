@@ -16,9 +16,9 @@ public class Player : MonoBehaviour
     protected RaycastHit2D hit;
     
     //Boosts
-    public float BoostValue = 2.0f;
+    private float BoostValue = 1.5f;
     protected float Duration = 5.0f;
-    public static bool BoostPicked;
+    public bool BoostPicked;
     
     protected bool activateSpeed;
     protected float speedActivateTime;
