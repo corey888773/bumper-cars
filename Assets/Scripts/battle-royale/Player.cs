@@ -8,12 +8,12 @@ using static System.Math;
 
 public class Player : MonoBehaviour
 {
-
+     
     protected Vector2 _playerMove;
-
+    
     public Collider2D _boxCollider2D;
-
     protected Rigidbody2D _rigidbody2D;
+    protected RaycastHit2D hit;
 
     //safeState
     public bool safe;
@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
     public float rotationSpeed = 720.0f;
     public static float velocity = 7.0f;
 
+    public LayerMask filterMask;
+    private Collider2D checkCollider;
+    public float scanRadius = 3f;
+    
     protected virtual void Awake()
     {
         // get all required components
@@ -35,17 +39,24 @@ public class Player : MonoBehaviour
         //specification of player movement vector
         _playerMove = new Vector2(input.x, input.y);
         float inputMagnitude = Mathf.Clamp01(_playerMove.magnitude);
-
-
+        
+        
         // some Physical stuff
         if (_playerMove != Vector2.zero)
         {
-            Quaternion rotateDirection = Quaternion.LookRotation(Vector3.forward, _playerMove);
-            transform.rotation =
-                Quaternion.RotateTowards(transform.rotation, rotateDirection, Time.deltaTime * rotationSpeed);
+            Quaternion rotateDirection= Quaternion.LookRotation(Vector3.forward, _playerMove);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, Time.deltaTime * rotationSpeed);
         }
-
+        
         _rigidbody2D.AddForce(_playerMove * inputMagnitude);
     }
 
+    protected virtual void FixedUpdate()
+    {
+        Vector2 input = _joystick.getValue() * velocity;
+        Move(new Vector2(input.x, input.y));
+    }
+
 }
+
+
