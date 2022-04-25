@@ -13,8 +13,13 @@ public class Player : MonoBehaviour
     
     public Collider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;
-    protected RaycastHit2D hit;
+    public bool WeaponPicked;
 
+    protected bool gunPicked;
+
+    protected bool sniperRifflePicked;
+
+    protected bool shotgunPicked;
     //safeState
     public bool safe;
 
@@ -22,10 +27,7 @@ public class Player : MonoBehaviour
     public float rotationSpeed = 720.0f;
     public static float velocity = 7.0f;
 
-    public LayerMask filterMask;
     private Collider2D checkCollider;
-    public float scanRadius = 3f;
-    
     protected virtual void Awake()
     {
         // get all required components
@@ -50,11 +52,55 @@ public class Player : MonoBehaviour
         
         _rigidbody2D.AddForce(_playerMove * inputMagnitude);
     }
+    
+    // function to add effects after stepping on objects like weapons etc.
+    protected void AddEffect(WeaponType type)
+    {
+        switch (type)
+        {
+            case WeaponType.Gun:
+                print ("Gun");
+                WeaponPicked = true;
+                gunPicked = true;
+                break;
+            case WeaponType.Shotgun:
+                print("Shotgun");
+                WeaponPicked = true;
+                shotgunPicked = true;
+                break;
+            case WeaponType.SniperRifle:
+                print("SniperRifle");
+                WeaponPicked = true;
+                sniperRifflePicked = true;
+                break;
+            default:
+                Debug.Log("no effect implemented");
+                break;
+        }
+    }
 
     protected virtual void FixedUpdate()
     {
         Vector2 input = _joystick.getValue() * velocity;
         Move(new Vector2(input.x, input.y));
+
+        if (gunPicked)
+        {
+            gunPicked = false;
+            WeaponPicked = false;
+        }
+
+        if (shotgunPicked)
+        {
+            shotgunPicked = false;
+            WeaponPicked = false;
+        }
+
+        if (sniperRifflePicked)
+        {
+            sniperRifflePicked = false;
+            WeaponPicked = false;
+        }
     }
 
 }
