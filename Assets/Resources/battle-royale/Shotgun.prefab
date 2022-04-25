@@ -143,6 +143,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2586773837865657279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b8a313d21fac1739cdf127d51d9f90, type: 3}
+  m_Script: {fileID: 11500000, guid: eb1fc1ea66bc5a499a54be27ad248d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pelletCount: 8
+  spreadAngle: 10
+  pelletFireVelocity: 700
+  pelletPrefab: {fileID: 4389502704300384628, guid: 3021dbe4674099d1bbb19ee43e540d40, type: 3}
+  shotgunExit: {fileID: 0}

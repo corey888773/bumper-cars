@@ -387,6 +387,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7903443919657549642, guid: c46cd344a3d079e4885313dfb4d9d389, type: 3}
   m_PrefabInstance: {fileID: 1775789637}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1559459908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1595862135819013314, guid: c46cd344a3d079e4885313dfb4d9d389, type: 3}
+  m_PrefabInstance: {fileID: 1775789637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559459898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f726b60bad1ee64baafe9f53ce8cc96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1775789637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -464,6 +475,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c46cd344a3d079e4885313dfb4d9d389, type: 3}
+--- !u!1 &1806598689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1806598691}
+  - component: {fileID: 1806598690}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1806598690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806598689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782b940f137733721ab8b8d0c6b354ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players:
+  - {fileID: 1559459908}
+  weaponManager: {fileID: 1857470055}
+--- !u!4 &1806598691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806598689}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4151914, y: -0.75408983, z: -0.009776523}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1835328420 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5550543251879381097, guid: 87da42dc565b2081db2a2ac3594a3b5e, type: 3}
@@ -492,6 +550,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66133b511e48dc79b83fc92c16988530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1857470054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1857470056}
+  - component: {fileID: 1857470055}
+  m_Layer: 0
+  m_Name: WeaponManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1857470055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857470054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3aad02637c661279b65e35e35d11c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefab: []
+  weapons: []
+  Count: 0
+  maxWeaponsAmount: 4
+  tilemap: {fileID: 1942699833}
+  tileWorldLocations: []
+--- !u!4 &1857470056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857470054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4151914, y: -0.75408983, z: -0.009776523}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1942699830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2991,8 +3099,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1fc1ea66bc5a499a54be27ad248d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pelletCount: 4
-  spreadAngle: 15
-  pelletFireVelocity: 500
+  pelletCount: 8
+  spreadAngle: 10
+  pelletFireVelocity: 750
   pelletPrefab: {fileID: 4389502704300384628, guid: 3021dbe4674099d1bbb19ee43e540d40, type: 3}
   shotgunExit: {fileID: 1498961350}
