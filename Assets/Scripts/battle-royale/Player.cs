@@ -15,9 +15,6 @@ public class Player : MonoBehaviour
     protected Rigidbody2D _rigidbody2D;
     protected RaycastHit2D hit;
 
-    //safeState
-    public bool safe;
-
     public joystickScript _joystick;
     public float rotationSpeed = 720.0f;
     public static float velocity = 7.0f;
@@ -25,6 +22,10 @@ public class Player : MonoBehaviour
     public LayerMask filterMask;
     private Collider2D checkCollider;
     public float scanRadius = 3f;
+
+    //weapon section
+    private bool weapon = true;
+    private GameObject _weapon;
     
     protected virtual void Awake()
     {
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
         _boxCollider2D = GetComponent<Collider2D>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _weapon = GameObject.FindWithTag("Weapon");
     }
 
     protected virtual void Move(Vector2 input)
@@ -47,8 +49,9 @@ public class Player : MonoBehaviour
             Quaternion rotateDirection= Quaternion.LookRotation(Vector3.forward, _playerMove);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, Time.deltaTime * rotationSpeed);
         }
-        
-        _rigidbody2D.AddForce(_playerMove * inputMagnitude);
+
+        _rigidbody2D.transform.Translate(new Vector3(_playerMove.x * Time.deltaTime * inputMagnitude, _playerMove.y * Time.deltaTime * inputMagnitude, 0), Space.World);
+        // _rigidbody2D.AddForce(_playerMove * inputMagnitude);
     }
 
     protected virtual void FixedUpdate()
@@ -57,6 +60,18 @@ public class Player : MonoBehaviour
         Move(new Vector2(input.x, input.y));
     }
 
+    protected virtual void GetWeapon()
+    {
+        weapon = true;
+        _weapon.gameObject.SetActive(true);
+    }
+
+    protected virtual void ThrowWeapon()
+    {
+        weapon = false;
+        _weapon.gameObject.SetActive(false);
+    }
+    
 }
 
 
