@@ -73,9 +73,10 @@ public class movingScript : MonoBehaviour
 
     private void newPathTile(int i, int j)
     {
-        GameObject new_tile = Instantiate(pathTile, mapa.getPosInLabyrinth(new Vector2Int(i, j)), Quaternion.identity);
+        GameObject new_tile = Instantiate(pathTile, mapa.getPosInLabyrinth(new Vector2Int(i, j)),  Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
         new_tile.transform.parent = tiles.transform;
         new_tile.transform.localScale *= mapa.getScalingRatio();
+        new_tile.transform.position = new Vector3(new_tile.transform.position.x, new_tile.transform.position.y, 8.0f);
         new_tile.name = "pathTile" + i.ToString() + "," + j.ToString();
     }
 
