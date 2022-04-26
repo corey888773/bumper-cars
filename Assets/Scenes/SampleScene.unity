@@ -304,7 +304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498961349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.534, z: 0}
+  m_LocalPosition: {x: 0, y: 0.618, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 1942699834}
   m_Layer: 0
   m_Name: Map
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2991,8 +2991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1fc1ea66bc5a499a54be27ad248d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pelletCount: 4
+  pelletCount: 10
   spreadAngle: 15
-  pelletFireVelocity: 500
+  pelletFireVelocity: 750
   pelletPrefab: {fileID: 4389502704300384628, guid: 3021dbe4674099d1bbb19ee43e540d40, type: 3}
   shotgunExit: {fileID: 1498961350}
