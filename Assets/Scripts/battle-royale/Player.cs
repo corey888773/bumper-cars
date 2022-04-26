@@ -13,7 +13,15 @@ public class Player : MonoBehaviour
     
     public Collider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;
-    protected RaycastHit2D hit;
+    public bool WeaponPicked;
+
+    protected bool gunPicked;
+
+    protected bool sniperRifflePicked;
+
+    protected bool shotgunPicked;
+    //safeState
+    public bool safe;
 
     public joystickScript _joystick;
     public float rotationSpeed = 720.0f;
@@ -53,11 +61,55 @@ public class Player : MonoBehaviour
         _rigidbody2D.transform.Translate(new Vector3(_playerMove.x * Time.deltaTime * inputMagnitude, _playerMove.y * Time.deltaTime * inputMagnitude, 0), Space.World);
         // _rigidbody2D.AddForce(_playerMove * inputMagnitude);
     }
+    
+    // function to add effects after stepping on objects like weapons etc.
+    protected void AddEffect(WeaponType type)
+    {
+        switch (type)
+        {
+            case WeaponType.Gun:
+                print ("Gun");
+                WeaponPicked = true;
+                gunPicked = true;
+                break;
+            case WeaponType.Shotgun:
+                print("Shotgun");
+                WeaponPicked = true;
+                shotgunPicked = true;
+                break;
+            case WeaponType.SniperRifle:
+                print("SniperRifle");
+                WeaponPicked = true;
+                sniperRifflePicked = true;
+                break;
+            default:
+                Debug.Log("no effect implemented");
+                break;
+        }
+    }
 
     protected virtual void FixedUpdate()
     {
         Vector2 input = _joystick.getValue() * velocity;
         Move(new Vector2(input.x, input.y));
+
+        if (gunPicked)
+        {
+            gunPicked = false;
+            WeaponPicked = false;
+        }
+
+        if (shotgunPicked)
+        {
+            shotgunPicked = false;
+            WeaponPicked = false;
+        }
+
+        if (sniperRifflePicked)
+        {
+            sniperRifflePicked = false;
+            WeaponPicked = false;
+        }
     }
 
     protected virtual void GetWeapon()

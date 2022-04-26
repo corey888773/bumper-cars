@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : MonoBehaviour
+public class Shotgun : Weapon
 {
     public int pelletCount;
     public float spreadAngle;
@@ -14,8 +14,10 @@ public class Shotgun : MonoBehaviour
 
     private List<Quaternion> pellets;   
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        _weaponType = WeaponType.Shotgun;
         pellets = new List<Quaternion>(pelletCount);
         for (int i = 0; i < pelletCount; i++)
         {
