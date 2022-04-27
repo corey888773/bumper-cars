@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="2388"
+   height="1668"
+   viewBox="0 0 2388 1668"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="main-bg.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="0.43105516"
+     inkscape:cx="1193.5827"
+     inkscape:cy="835.15994"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer3" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="DotL"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="DotL"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,5.92,0.8)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         id="path13831" />
+    </marker>
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:inline">
+    <rect
+       style="display:inline;fill:#d0f6f8;fill-opacity:1;stroke:#549460;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="rect7718"
+       width="2398.7649"
+       height="1693.5188"
+       x="-5.7207756"
+       y="-22.426399"
+       inkscape:export-filename="C:\Users\Kinga\Desktop\Koło-AGH-Code-Indutry\ui - CALOSC\main-lobby\bg-elements\sky.png"
+       inkscape:export-xdpi="105.112"
+       inkscape:export-ydpi="105.112" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Layer 3">
+    <rect
+       style="display:inline;fill:#d5fbb2;fill-opacity:1;stroke:#549460;stroke-width:0.0887864;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.995825;marker-mid:url(#DotL);paint-order:markers fill stroke"
+       id="rect912"
+       width="2412.8733"
+       height="1028.281"
+       x="-13.417534"
+       y="645.58514"
+       inkscape:export-filename="C:\Users\Kinga\Desktop\Koło-AGH-Code-Indutry\ui - CALOSC\main-lobby\bg-elements\grass.png"
+       inkscape:export-xdpi="105.112"
+       inkscape:export-ydpi="105.112" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <path
+       id="rect29376"
+       style="display:inline;fill:#e5e1b3;fill-opacity:1;stroke:#eae49c;stroke-width:0;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       d="m 1080.7296,643.70286 282.1274,0.004 c 0,0 -20.2589,194.41276 34.0017,230.79226 44.2959,29.69849 83.3252,56.56184 129.0342,67.39366 93.4318,22.14083 192.2961,-17.14365 285.0525,-7.70421 113.9074,11.59194 259.4065,65.6022 313.4618,97.03483 64.686,37.614 197.6058,41.31 273.2135,87.9338 l 1.8351,554.709 -2405.1765756,-2.7738 -4.2495927,-640.1143 C 67.443131,963.2983 459.11472,1049.3294 685.77814,985.00062 816.61737,947.86749 970.46834,885.44569 1058.2132,791.8599 c 47.5963,-50.76458 22.5164,-148.15686 22.5164,-148.15686 z"
+       sodipodi:nodetypes="ccsassccccasc" />
+  </g>
+</svg>
