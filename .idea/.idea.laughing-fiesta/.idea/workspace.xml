@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="382eb410-e7a4-4b05-926d-47c6489b5c90" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Czolgi/DeathSpiral.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.laughing-fiesta/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.laughing-fiesta/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Czolgi/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Czolgi/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Czolgi/ObstacleGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Czolgi/ObstacleGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,6 +80,12 @@
       <workItem from="1649592031767" duration="2894000" />
       <workItem from="1649861625109" duration="5633000" />
       <workItem from="1650210572583" duration="1095000" />
+      <workItem from="1651070842421" duration="1899000" />
+      <workItem from="1651073408641" duration="1200000" />
+      <workItem from="1651145388080" duration="600000" />
+      <workItem from="1651160122170" duration="493000" />
+      <workItem from="1651179129111" duration="3759000" />
+      <workItem from="1652209013541" duration="392000" />
     </task>
     <servers />
   </component>

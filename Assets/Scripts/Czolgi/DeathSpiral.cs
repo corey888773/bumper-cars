@@ -1,31 +1,20 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-namespace Czolgi {
-    public class ObstacleGenerator : MonoBehaviour {
+
+namespace Czolgi
+{
+    public class DeathSpiral : MonoBehaviour
+    {
+        /*
+         * Functions:
+         *  MakeSpiral - generates spiral of obstacles frame by frame
+         *      arguments:
+         *          obstacle - GameObject witch will be ingredient of spiral
+         */
         [SerializeField] private GameObject obst;
         [SerializeField] private Transform parent;
-        private Camera cam;
-        private float cameraWidth, cameraHeight;
-        //private DeathSpiral dp;
 
-        // Start is called before the first frame update
-        void Start() {
-            cam = Camera.main;
-            cameraHeight = cam.orthographicSize;
-            cameraWidth = Screen.width / Screen.height * cam.orthographicSize;
-
-            var horSecSize = cameraWidth / 2;
-            var verSecSize = cameraHeight / 2;
-/*
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
-                    Instantiate(obst, new Vector3(Random.Range(-cameraWidth + i * horSecSize, -cameraWidth + (i + 1) * horSecSize - 0.7f),
-                        Random.Range(-cameraHeight + j * verSecSize, -cameraHeight + (j + 1) * verSecSize - 0.7f), 0), Quaternion.identity, parent);
-                }
-            }*/
-            StartCoroutine(MakeSpiral(cameraWidth, cameraHeight));
-        }
-        
         public IEnumerator MakeSpiral(float cameraWidth, float cameraHeight)
         {
             float x = 2*cameraWidth / 0.7f;
@@ -43,8 +32,8 @@ namespace Czolgi {
                 //top edge of rectangle
                 for (float i = 0; i <= x; i++)
                 {
-                    Instantiate(obst, new Vector3(-cameraWidth+rev[0]*0.7f+i*0.7f, cameraHeight-0.7f-rev[0]*0.7f, 0), Quaternion.identity, parent);
-                    yield return new WaitForSeconds(.5f);
+                    Instantiate(obst, new Vector3(-cameraWidth+rev[0]*0.7f+i*0.7f, cameraHeight-rev[0]*0.7f, 0), Quaternion.identity, parent);
+                    yield return null;
                 }
                 rev[0]++;
                 y--;
@@ -53,7 +42,7 @@ namespace Czolgi {
                 for (float i = 0; i <= y; i++)
                 {
                     Instantiate(obst, new Vector3(cameraWidth-rev[1]*0.7f, cameraHeight-0.7f-rev[1]*0.7f-i*0.7f, 0), Quaternion.identity, parent);
-                    yield return new WaitForSeconds(.5f);
+                    yield return null;
                 }
                 rev[1]++;
                 x--;
@@ -62,7 +51,7 @@ namespace Czolgi {
                 for (float i = 0; i <= x; i++)
                 {
                     Instantiate(obst, new Vector3(cameraWidth-0.7f-rev[2]*0.7f-i*0.7f, -cameraHeight+rev[2]*0.7f, 0), Quaternion.identity, parent);
-                    yield return new WaitForSeconds(.5f);
+                    yield return null;
                 }
                 rev[2]++;
                 y--;
@@ -71,11 +60,11 @@ namespace Czolgi {
                 for (float i = 0; i <= y; i++)
                 {
                     Instantiate(obst, new Vector3(-cameraWidth+rev[3]*0.7f, -cameraHeight+0.7f+rev[3]*0.7f+i*0.7f, 0), Quaternion.identity, parent);
-                    yield return new WaitForSeconds(.5f);
+                    yield return null;
                 }
                 rev[3]++;
                 x--;
             }
         }
-    }
+    }    
 }
