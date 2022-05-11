@@ -17,11 +17,11 @@ public class Player : MonoBehaviour
     protected Rigidbody2D _rigidbody2D;
     public static bool WeaponPicked;
 
-    public bool gunPicked;
+    public static bool gunPicked;
 
-    public bool sniperRifflePicked;
+    public static bool sniperRifflePicked;
 
-    public bool shotgunPicked;
+    public static bool shotgunPicked = true;
     //safeState
     public bool safe;
     protected bool isAlive;
@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     //weapon section
     private bool weapon = true;
     private GameObject _weapon;
+    private bool knock;
+    private float knockTime;
+    
     public GameObject _Shotgun;
     public GameObject _SniperRiffle;
     protected virtual void Awake()
@@ -103,29 +106,29 @@ public class Player : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            isAlive = false;
-        }
+        
         Vector2 input = _joystick.getValue() * velocity;
-        Move(new Vector2(input.x, input.y));
+        if(!knock)
+            Move(new Vector2(input.x, input.y));
+        
+        DisableMove();
 
-        if (gunPicked)
+            if (gunPicked)
         {
             gunPicked = false;
             WeaponPicked = false;
         }
 
-        if (shotgunPicked)
-        {
-            _Shotgun.SetActive(true);
-            if (Input.GetButtonDown("Jump"))
-            {
-                shotgunPicked = false;
-                WeaponPicked = false;
-                _Shotgun.SetActive(false);
-            }
-        }
+        // if (shotgunPicked)
+        // {
+        //     _Shotgun.SetActive(true);
+        //     if (Input.GetButtonDown("Jump"))
+        //     {
+        //         shotgunPicked = false;
+        //         WeaponPicked = false;
+        //         // _Shotgun.SetActive(false);
+        //     }
+        // }
 
         if (sniperRifflePicked)
         {
@@ -151,18 +154,43 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected virtual void GetWeapon()
+    public virtual void GetWeapon()
     {
         weapon = true;
         _weapon.gameObject.SetActive(true);
     }
 
-    protected virtual void ThrowWeapon()
+    public virtual void ThrowWeapon(WeaponType type)
     {
         weapon = false;
-        _weapon.gameObject.SetActive(false);
+
+        switch (type)
+        {
+            case WeaponType.Shotgun:
+                _Shotgun.SetActive(false);
+                break;
+            case WeaponType.SniperRifle:
+                break;
+        }
     }
-    
+
+    public void KnockBack(Vector2 force, bool torque = false)
+    {
+        _rigidbody2D.AddForce(-1*force);
+        if(torque)
+            _rigidbody2D.AddTorque(200f);
+       
+        knock = true;
+        knockTime = Time.time;
+    }
+
+    private void DisableMove()
+    {
+        if (!knock)
+            return;
+        if (Time.time - knockTime > 0.5f)
+            knock = false;
+    }
 }
 
 

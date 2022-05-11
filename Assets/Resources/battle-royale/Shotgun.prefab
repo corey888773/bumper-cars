@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1072778566637867092}
   - component: {fileID: 5967147712673161062}
   - component: {fileID: 3202057315705328384}
-  - component: {fileID: -4050430228077041160}
+  - component: {fileID: 7393321812078226667}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -134,7 +134,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0.1
---- !u!114 &-4050430228077041160
+--- !u!114 &7393321812078226667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,11 +143,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2586773837865657279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb1fc1ea66bc5a499a54be27ad248d2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 53915b27540879dcdbf2e5a3cf13c825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pelletCount: 8
-  spreadAngle: 10
-  pelletFireVelocity: 700
-  pelletPrefab: {fileID: 4389502704300384628, guid: 3021dbe4674099d1bbb19ee43e540d40, type: 3}
-  shotgunExit: {fileID: 0}

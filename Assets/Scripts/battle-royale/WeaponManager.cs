@@ -8,7 +8,7 @@ public class WeaponManager : MonoBehaviour
     public List<GameObject> weaponPrefab;
     public List<Weapon> weapons;
     public float Count;
-    public static int weaponCount = 4;
+    public int weaponCount = 0;
     public int maxWeaponsAmount = 4;
     private Camera _camera;
     public Tilemap tilemap;

@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class Pellet : MonoBehaviour
 {
+    
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!collision.gameObject.CompareTag("Pellet"))
+        if(!collision.gameObject.CompareTag("Pellet") && !collision.gameObject.CompareTag("Player"))
             Destroy(gameObject);
     }
 }
