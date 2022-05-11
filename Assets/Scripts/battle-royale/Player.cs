@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     public static bool sniperRifflePicked;
 
-    public static bool shotgunPicked;
+    public static bool shotgunPicked = true;
     //safeState
     public bool safe;
     protected bool isAlive;
@@ -106,10 +106,7 @@ public class Player : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            isAlive = false;
-        }
+        
         Vector2 input = _joystick.getValue() * velocity;
         if(!knock)
             Move(new Vector2(input.x, input.y));
@@ -122,16 +119,16 @@ public class Player : MonoBehaviour
             WeaponPicked = false;
         }
 
-        if (shotgunPicked)
-        {
-            _Shotgun.SetActive(true);
-            if (Input.GetButtonDown("Jump"))
-            {
-                shotgunPicked = false;
-                WeaponPicked = false;
-                _Shotgun.SetActive(false);
-            }
-        }
+        // if (shotgunPicked)
+        // {
+        //     _Shotgun.SetActive(true);
+        //     if (Input.GetButtonDown("Jump"))
+        //     {
+        //         shotgunPicked = false;
+        //         WeaponPicked = false;
+        //         // _Shotgun.SetActive(false);
+        //     }
+        // }
 
         if (sniperRifflePicked)
         {
@@ -157,16 +154,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected virtual void GetWeapon()
+    public virtual void GetWeapon()
     {
         weapon = true;
         _weapon.gameObject.SetActive(true);
     }
 
-    protected virtual void ThrowWeapon()
+    public virtual void ThrowWeapon(WeaponType type)
     {
         weapon = false;
-        _weapon.gameObject.SetActive(false);
+
+        switch (type)
+        {
+            case WeaponType.Shotgun:
+                _Shotgun.SetActive(false);
+                break;
+            case WeaponType.SniperRifle:
+                break;
+        }
     }
 
     public void KnockBack(Vector2 force, bool torque = false)

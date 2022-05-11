@@ -35,7 +35,7 @@ public abstract class Weapon : MonoBehaviour
             return;
         collision.SendMessage("AddEffect", _weaponType);
         Destroy(gameObject);
-        WeaponManager.weaponCount -= 1;
+        GameManager.instance.weaponManager.weaponCount -= 1;
     }
 
     protected void Update()
