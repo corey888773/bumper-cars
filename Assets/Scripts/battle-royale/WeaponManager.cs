@@ -8,7 +8,7 @@ public class WeaponManager : MonoBehaviour
     public List<GameObject> weaponPrefab;
     public List<Weapon> weapons;
     public float Count;
-    public static int weaponCount;
+    public static int weaponCount = 4;
     public int maxWeaponsAmount = 4;
     private Camera _camera;
     public Tilemap tilemap;
@@ -17,7 +17,6 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         _camera = Camera.main;
-        weaponCount = 0;
         weaponPrefab = new List<GameObject>(Resources.LoadAll<GameObject>("battle-royale"));
         tileWorldLocations = new List<Vector3>();
 
@@ -50,7 +49,8 @@ public class WeaponManager : MonoBehaviour
         var weaponPicker = Random.Range(0, 3);
         var weapon = weaponPrefab[weaponPicker];
         Instantiate(weapon, position, Quaternion.identity);
-        weaponCount++;
+        weaponCount += 1;
+        print(weaponCount);
     }
 
     

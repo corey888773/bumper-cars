@@ -29,10 +29,10 @@ public class Shotgun : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            Fire();
-        }
+        // if(Input.GetButtonDown("Jump") && Player.shotgunPicked)
+        // {
+        //     Fire();
+        // }
     }
     
 

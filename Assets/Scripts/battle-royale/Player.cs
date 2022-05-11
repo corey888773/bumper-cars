@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static System.Math;
+using Random = UnityEngine.Random;
 
 
 public class Player : MonoBehaviour
@@ -13,15 +15,16 @@ public class Player : MonoBehaviour
     
     public Collider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;
-    public bool WeaponPicked;
+    public static bool WeaponPicked;
 
-    protected bool gunPicked;
+    public static bool gunPicked;
 
-    protected bool sniperRifflePicked;
+    public static bool sniperRifflePicked;
 
-    protected bool shotgunPicked;
+    public static bool shotgunPicked;
     //safeState
     public bool safe;
+    protected bool isAlive;
 
     public joystickScript _joystick;
     public float rotationSpeed = 720.0f;
@@ -37,6 +40,8 @@ public class Player : MonoBehaviour
     private bool knock;
     private float knockTime;
     
+    public GameObject _Shotgun;
+    public GameObject _SniperRiffle;
     protected virtual void Awake()
     {
         // get all required components
@@ -44,6 +49,7 @@ public class Player : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _weapon = GameObject.FindWithTag("Weapon");
+        isAlive = true;
     }
 
     protected virtual void Move(Vector2 input)
@@ -89,9 +95,21 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+    
+    IEnumerator HideAndShow(GameObject go, float delay, int counter)
+    {
+        go.transform.position = new Vector3(int.MaxValue, int.MaxValue, int.MaxValue);
+        yield return new WaitForSeconds(delay);
+        transform.position = GameManager.instance.spawnPositions[counter].transform.position;
+        GameManager.instance.spawnPositions[counter].SpawnAvailable = false;
+    }
 
     protected virtual void FixedUpdate()
     {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            isAlive = false;
+        }
         Vector2 input = _joystick.getValue() * velocity;
         if(!knock)
             Move(new Vector2(input.x, input.y));
@@ -106,14 +124,36 @@ public class Player : MonoBehaviour
 
         if (shotgunPicked)
         {
-            shotgunPicked = false;
-            WeaponPicked = false;
+            _Shotgun.SetActive(true);
+            if (Input.GetButtonDown("Jump"))
+            {
+                shotgunPicked = false;
+                WeaponPicked = false;
+                _Shotgun.SetActive(false);
+            }
         }
 
         if (sniperRifflePicked)
         {
-            sniperRifflePicked = false;
-            WeaponPicked = false;
+            _SniperRiffle.SetActive(true);
+            if (Input.GetButtonDown("Jump"))
+            {
+                sniperRifflePicked = false;
+                WeaponPicked = false;
+                _SniperRiffle.SetActive(false);
+            }
+        }
+
+        if (!isAlive)
+        {
+            var random = new System.Random();
+            int choice = random.Next(GameManager.instance.spawnPositions.Count);
+            while (!GameManager.instance.spawnPositions[choice].SpawnAvailable)
+            {
+                choice = random.Next(GameManager.instance.spawnPositions.Count);
+            }
+            StartCoroutine(HideAndShow(this.GameObject(), 0.5f, choice));
+            isAlive = true;
         }
     }
 

@@ -14,12 +14,11 @@ public class TileTest : MonoBehaviour {
         {   
             Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
             Vector3 place = tilemap.CellToWorld(localPlace);
+            tileWorldLocations.Add(place);
             if (tilemap.HasTile(localPlace))
             {
-                tileWorldLocations.Add(place);
+                tileWorldLocations.Remove(place);
             }
         }
-
-        print(tileWorldLocations);
     }  
 }
