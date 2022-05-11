@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
     //weapon section
     private bool weapon = true;
     private GameObject _weapon;
+    private bool knock;
+    private float knockTime;
     
     protected virtual void Awake()
     {
@@ -91,9 +93,12 @@ public class Player : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         Vector2 input = _joystick.getValue() * velocity;
-        Move(new Vector2(input.x, input.y));
+        if(!knock)
+            Move(new Vector2(input.x, input.y));
+        
+        DisableMove();
 
-        if (gunPicked)
+            if (gunPicked)
         {
             gunPicked = false;
             WeaponPicked = false;
@@ -123,7 +128,24 @@ public class Player : MonoBehaviour
         weapon = false;
         _weapon.gameObject.SetActive(false);
     }
-    
+
+    public void KnockBack(Vector2 force, bool torque = false)
+    {
+        _rigidbody2D.AddForce(-1*force);
+        if(torque)
+            _rigidbody2D.AddTorque(200f);
+       
+        knock = true;
+        knockTime = Time.time;
+    }
+
+    private void DisableMove()
+    {
+        if (!knock)
+            return;
+        if (Time.time - knockTime > 0.5f)
+            knock = false;
+    }
 }
 
 

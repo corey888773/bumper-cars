@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Shotgun : Weapon
+public class Shotgun : MonoBehaviour
 {
     public int pelletCount;
     public float spreadAngle;
     public float pelletFireVelocity = 1;
 
     public GameObject pelletPrefab;
-
+    public Player _parent;
+    
     public Transform shotgunExit;
 
     private List<Quaternion> pellets;   
     // Start is called before the first frame update
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-        _weaponType = WeaponType.Shotgun;
+        
         pellets = new List<Quaternion>(pelletCount);
         for (int i = 0; i < pelletCount; i++)
         {
@@ -33,6 +34,7 @@ public class Shotgun : Weapon
             Fire();
         }
     }
+    
 
     private void Fire()
     {
@@ -43,6 +45,7 @@ public class Shotgun : Weapon
             p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
             p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVelocity);
         }
+        _parent.KnockBack(transform.up * pelletFireVelocity);
     }
 }
 
