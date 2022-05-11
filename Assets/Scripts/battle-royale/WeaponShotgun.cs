@@ -7,6 +7,6 @@ public class WeaponShotgun : Weapon
     protected override void Awake()
     {
         base.Awake();
-        _weaponType = WeaponType.Gun;
+        _weaponType = WeaponType.Shotgun;
     }
 }

@@ -33,9 +33,13 @@ public abstract class Weapon : MonoBehaviour
         // }
         if (!collision.CompareTag("Player"))
             return;
-        collision.SendMessage("AddEffect", _weaponType);
-        Destroy(gameObject);
-        GameManager.instance.weaponManager.weaponCount -= 1;
+        foreach (var player in GameManager.instance.players.Where(player => player._boxCollider2D == collision && !player.WeaponIsPicked()))
+        {
+            collision.SendMessage("GetWeapon", _weaponType);
+            Destroy(gameObject);
+            GameManager.instance.weaponManager.weaponCount -= 1; 
+        }
+        
     }
 
     protected void Update()

@@ -18,7 +18,6 @@ public class Shotgun : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        
         pellets = new List<Quaternion>(pelletCount);
         for (int i = 0; i < pelletCount; i++)
         {
@@ -29,7 +28,7 @@ public class Shotgun : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if(Input.GetButtonDown("Jump") && Player.shotgunPicked)
+        if(Input.GetButtonDown("Jump") && _parent.WeaponIsPicked())
         {
             Fire();
             _parent.ThrowWeapon(WeaponType.Shotgun);

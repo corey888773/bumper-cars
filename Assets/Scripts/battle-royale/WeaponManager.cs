@@ -8,7 +8,7 @@ public class WeaponManager : MonoBehaviour
     public List<GameObject> weaponPrefab;
     public List<Weapon> weapons;
     public float Count;
-    public int weaponCount = 0;
+    public int weaponCount = 4;
     public int maxWeaponsAmount = 4;
     private Camera _camera;
     public Tilemap tilemap;
@@ -46,11 +46,10 @@ public class WeaponManager : MonoBehaviour
     //spawn boosts in previously generated position
     private void InstantiateWeapon(Vector3 position)
     {
-        var weaponPicker = Random.Range(0, 3);
+        var weaponPicker = Random.Range(1, 3);
         var weapon = weaponPrefab[weaponPicker];
         Instantiate(weapon, position, Quaternion.identity);
         weaponCount += 1;
-        print(weaponCount);
     }
 
     
