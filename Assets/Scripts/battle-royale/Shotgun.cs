@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Shotgun : Weapon
@@ -28,10 +29,10 @@ public class Shotgun : Weapon
     // Update is called once per frame
     protected void Update()
     {
-        // if(Input.GetButtonDown("Jump") && Player.shotgunPicked)
-        // {
-        //     Fire();
-        // }
+        if(Input.GetButtonDown("Jump") && Player.shotgunPicked)
+        {
+            Fire();
+        }
     }
 
     private void Fire()
@@ -44,5 +45,6 @@ public class Shotgun : Weapon
             p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVelocity);
         }
     }
+    
 }
 

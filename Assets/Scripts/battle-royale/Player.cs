@@ -17,11 +17,11 @@ public class Player : MonoBehaviour
     protected Rigidbody2D _rigidbody2D;
     public static bool WeaponPicked;
 
-    public static bool gunPicked;
+    public bool gunPicked;
 
-    public static bool sniperRifflePicked;
+    public bool sniperRifflePicked;
 
-    public static bool shotgunPicked;
+    public bool shotgunPicked;
     //safeState
     public bool safe;
     protected bool isAlive;
