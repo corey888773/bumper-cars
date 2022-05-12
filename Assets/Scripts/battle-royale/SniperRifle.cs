@@ -30,6 +30,7 @@ public class SniperRifle : Weapon
         if (Input.GetButtonDown("Jump"))
         {
             Fire();
+            _parent.ThrowWeapon(WeaponType.SniperRifle);
         }
         ShootLaser();
     }

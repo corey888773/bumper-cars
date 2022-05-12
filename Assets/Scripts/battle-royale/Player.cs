@@ -170,6 +170,7 @@ public class Player : MonoBehaviour
                 _Shotgun.SetActive(false);
                 break;
             case WeaponType.SniperRifle:
+                _SniperRiffle.SetActive(false);
                 break;
         }
     }
