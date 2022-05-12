@@ -15,13 +15,13 @@ public class Player : MonoBehaviour
     
     public Collider2D _boxCollider2D;
     protected Rigidbody2D _rigidbody2D;
-    public static bool WeaponPicked;
+    public bool WeaponPicked;
 
-    public static bool gunPicked;
+    private bool gunPicked;
 
-    public static bool sniperRifflePicked;
+    private bool sniperRifflePicked;
 
-    public static bool shotgunPicked = true;
+    private bool shotgunPicked;
     //safeState
     public bool safe;
     protected bool isAlive;
@@ -69,26 +69,28 @@ public class Player : MonoBehaviour
         _rigidbody2D.transform.Translate(new Vector3(_playerMove.x * Time.deltaTime * inputMagnitude, _playerMove.y * Time.deltaTime * inputMagnitude, 0), Space.World);
         // _rigidbody2D.AddForce(_playerMove * inputMagnitude);
     }
+
+    public bool WeaponIsPicked()
+    {
+        return WeaponPicked;
+    }
     
     // function to add effects after stepping on objects like weapons etc.
-    protected void AddEffect(WeaponType type)
+    protected void GetWeapon(WeaponType type)
     {
+        WeaponPicked = true;
         switch (type)
         {
             case WeaponType.Gun:
-                print ("Gun");
-                WeaponPicked = true;
                 gunPicked = true;
                 break;
             case WeaponType.Shotgun:
-                print("Shotgun");
-                WeaponPicked = true;
                 shotgunPicked = true;
+                _Shotgun.SetActive(true);
                 break;
             case WeaponType.SniperRifle:
-                print("SniperRifle");
-                WeaponPicked = true;
                 sniperRifflePicked = true;
+                _SniperRiffle.SetActive(true);
                 break;
             default:
                 Debug.Log("no effect implemented");
@@ -106,6 +108,7 @@ public class Player : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        if (Input.GetButtonDown("Fire1")) isAlive = false;
         
         Vector2 input = _joystick.getValue() * velocity;
         if(!knock)
@@ -113,36 +116,17 @@ public class Player : MonoBehaviour
         
         DisableMove();
 
-            if (gunPicked)
+        if (gunPicked)
         {
             gunPicked = false;
             WeaponPicked = false;
         }
 
-        // if (shotgunPicked)
-        // {
-        //     _Shotgun.SetActive(true);
-        //     if (Input.GetButtonDown("Jump"))
-        //     {
-        //         shotgunPicked = false;
-        //         WeaponPicked = false;
-        //         // _Shotgun.SetActive(false);
-        //     }
-        // }
-
-        if (sniperRifflePicked)
-        {
-            _SniperRiffle.SetActive(true);
-            if (Input.GetButtonDown("Jump"))
-            {
-                sniperRifflePicked = false;
-                WeaponPicked = false;
-                _SniperRiffle.SetActive(false);
-            }
-        }
-
         if (!isAlive)
         {
+            WeaponPicked = false;
+            ThrowWeapon(WeaponType.Shotgun);
+            ThrowWeapon(WeaponType.SniperRifle);
             var random = new System.Random();
             int choice = random.Next(GameManager.instance.spawnPositions.Count);
             while (!GameManager.instance.spawnPositions[choice].SpawnAvailable)
@@ -154,16 +138,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public virtual void GetWeapon()
-    {
-        weapon = true;
-        _weapon.gameObject.SetActive(true);
-    }
-
     public virtual void ThrowWeapon(WeaponType type)
     {
         weapon = false;
-
+        WeaponPicked = false;
+        
         switch (type)
         {
             case WeaponType.Shotgun:

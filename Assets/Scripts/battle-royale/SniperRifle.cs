@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-public class SniperRifle : Weapon
+public class SniperRifle : MonoBehaviour
 {
     
     public float bulletFireVelocity = 1;
@@ -27,8 +27,9 @@ public class SniperRifle : Weapon
     // Update is called once per frame
     protected void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && _parent.WeaponIsPicked())
         {
+            
             Fire();
             _parent.ThrowWeapon(WeaponType.SniperRifle);
         }

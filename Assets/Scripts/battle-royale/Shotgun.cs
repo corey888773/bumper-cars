@@ -29,7 +29,7 @@ public class Shotgun : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump") && _parent.WeaponIsPicked())
         {
             Fire();
             _parent.ThrowWeapon(WeaponType.Shotgun);
