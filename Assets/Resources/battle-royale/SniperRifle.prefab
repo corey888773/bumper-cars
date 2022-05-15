@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4442728694536014734}
   m_Layer: 0
   m_Name: SniperRifle
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -140,8 +140,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1559459908}
     - target: {fileID: 383180627051480466, guid: 182ed9a4802f41dc5bbfc47a5bbfbcd1, type: 3}
+      propertyPath: flamePrefab
+      value: 
+      objectReference: {fileID: 3494054644070405524, guid: 506f3449eec06b34085e632a8c5c43fc, type: 3}
+    - target: {fileID: 383180627051480466, guid: 182ed9a4802f41dc5bbfc47a5bbfbcd1, type: 3}
       propertyPath: pelletFireVelocity
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 383180627051480467, guid: 182ed9a4802f41dc5bbfc47a5bbfbcd1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383180627051480468, guid: 182ed9a4802f41dc5bbfc47a5bbfbcd1, type: 3}
       propertyPath: m_RootOrder
@@ -963,7 +971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1502314510}
   - component: {fileID: 1502314509}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,7 +1162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7903443919657549642, guid: c46cd344a3d079e4885313dfb4d9d389, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7903443919657549642, guid: c46cd344a3d079e4885313dfb4d9d389, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1166,7 +1174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7903443919657549642, guid: c46cd344a3d079e4885313dfb4d9d389, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7903443919657549642, guid: c46cd344a3d079e4885313dfb4d9d389, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1178,7 +1186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7903443919657549642, guid: c46cd344a3d079e4885313dfb4d9d389, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 7903443919657549642, guid: c46cd344a3d079e4885313dfb4d9d389, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -1473,7 +1481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3571403456527063506, guid: 18aa0c412a7ed560f9bb18d9c7823aa2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5704134174775663793, guid: 18aa0c412a7ed560f9bb18d9c7823aa2, type: 3}
       propertyPath: m_SortingOrder
@@ -1513,7 +1521,7 @@ GameObject:
   - component: {fileID: 1942699833}
   - component: {fileID: 1942699832}
   - component: {fileID: 1942699834}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1575,7 +1583,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -3907,3 +3915,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 383180627051480469, guid: 182ed9a4802f41dc5bbfc47a5bbfbcd1, type: 3}
   m_PrefabInstance: {fileID: 72269822}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2134068055
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134068051}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21ffeb8b72c6cb572b2c7c7f342a87a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

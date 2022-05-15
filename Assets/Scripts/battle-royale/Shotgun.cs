@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Shotgun : MonoBehaviour
 {
@@ -10,7 +12,9 @@ public class Shotgun : MonoBehaviour
     public float pelletFireVelocity = 1;
 
     public GameObject pelletPrefab;
+    public GameObject flamePrefab;
     public Player _parent;
+    private Animator _animator;
     
     public Transform shotgunExit;
 
@@ -20,6 +24,7 @@ public class Shotgun : MonoBehaviour
     {
         
         pellets = new List<Quaternion>(pelletCount);
+        _animator = GetComponent<Animator>();
         for (int i = 0; i < pelletCount; i++)
         {
             pellets.Add(Quaternion.Euler(Vector3.zero));
@@ -46,7 +51,11 @@ public class Shotgun : MonoBehaviour
             p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, pellets[i], spreadAngle);
             p.GetComponent<Rigidbody2D>().AddForce(p.transform.up * pelletFireVelocity);
         }
+
+        Instantiate(flamePrefab, _parent.gameObject.transform.position, quaternion.identity);
         _parent.KnockBack(transform.up * pelletFireVelocity);
+        // _animator.SetTrigger("Fire");
+        
     }
 }
 

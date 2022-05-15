@@ -35,8 +35,6 @@ public class SniperRifle : MonoBehaviour
         }
         ShootLaser();
     }
-    
-
     private void Fire()
     {
         GameObject bullet = Instantiate(bulletPrefab, riffleExit.position, riffleExit.rotation);
@@ -49,15 +47,16 @@ public class SniperRifle : MonoBehaviour
     {
         if (Physics2D.Raycast(laserTransform.position, transform.right))
         {
-            RaycastHit2D _hit = Physics2D.Raycast(riffleExit.position, transform.up);
+            RaycastHit2D _hit = Physics2D.Raycast(riffleExit.position, transform.up, Mathf.Infinity,
+                LayerMask.GetMask("Walls"));
             Draw2DRay(riffleExit.position, _hit.point);
+            
         }
         else
         {
             Draw2DRay(riffleExit.position, riffleExit.transform.up * laserDistance);
         }
     }
-
     void Draw2DRay(Vector2 startPos, Vector2 endPos)
     {
         _laser.SetPosition(0, startPos);

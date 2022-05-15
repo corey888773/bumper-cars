@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Pellet : MonoBehaviour
 {
     public float duration = 1f;
@@ -20,7 +21,7 @@ public class Pellet : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time - instaniateTime > duration)
+        if (Time.time - instaniateTime > UnityEngine.Random.Range(5,10) * 0.1f)
         {
             Destroy(gameObject);
         }
