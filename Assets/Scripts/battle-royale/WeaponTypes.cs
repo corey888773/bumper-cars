@@ -3,5 +3,6 @@ public enum WeaponType
 {
     Shotgun,
     SniperRifle,
-    Gun
+    Gun,
+    None
 }

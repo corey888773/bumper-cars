@@ -33,7 +33,7 @@ public abstract class Weapon : MonoBehaviour
         // }
         if (!collision.CompareTag("Player"))
             return;
-        foreach (var player in GameManager.instance.players.Where(player => player._boxCollider2D == collision && !player.WeaponIsPicked()))
+        foreach (var player in GameManager.instance.players.Where(player => player._boxCollider2D == collision && player.WeaponIsPicked() == WeaponType.None))
         {
             collision.SendMessage("GetWeapon", _weaponType);
             Destroy(gameObject);

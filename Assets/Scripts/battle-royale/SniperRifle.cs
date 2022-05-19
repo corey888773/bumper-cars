@@ -12,6 +12,7 @@ public class SniperRifle : MonoBehaviour
     public GameObject bulletPrefab;
     public Player _parent;
     public LineRenderer _laser;
+    private SpriteRenderer _spriteRenderer;
     public float laserDistance = 100f;
     
     
@@ -21,18 +22,22 @@ public class SniperRifle : MonoBehaviour
     
     private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         laserTransform = GetComponent<Transform>();
+
+        Activate(false);
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        if (Input.GetButtonDown("Jump") && _parent.WeaponIsPicked())
+        if (Input.GetButtonDown("Jump") && _parent.WeaponIsPicked() == WeaponType.SniperRifle)
         {
-            
             Fire();
             _parent.ThrowWeapon(WeaponType.SniperRifle);
         }
+        _laser.enabled = _parent.WeaponIsPicked() == WeaponType.SniperRifle;
+        
         ShootLaser();
     }
     private void Fire()
@@ -50,7 +55,6 @@ public class SniperRifle : MonoBehaviour
             RaycastHit2D _hit = Physics2D.Raycast(riffleExit.position, transform.up, Mathf.Infinity,
                 LayerMask.GetMask("Walls"));
             Draw2DRay(riffleExit.position, _hit.point);
-            
         }
         else
         {
@@ -62,5 +66,9 @@ public class SniperRifle : MonoBehaviour
         _laser.SetPosition(0, startPos);
         _laser.SetPosition(1, endPos);
     }
-    
+
+    public void Activate(bool state)
+    {
+        _spriteRenderer.enabled = state;
+    }
 }
